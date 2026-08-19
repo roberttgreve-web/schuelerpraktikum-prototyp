@@ -419,8 +419,14 @@
   .erg-grid > main { min-width: 0; }
   .erg-side {
     min-width: 0; background: var(--zm-gelb); border-radius: 20px; padding: 24px 22px;
-    position: sticky; top: 20px;
+    /* Buendig mit der ersten Kachel-Reihe statt mit der Cluster-Ueberschrift
+       ("Bis 10 km ...") darueber - Hoehe der Ueberschriftzeile gemessen. */
+    margin-top: 37px;
   }
+  /* Laeuft zunaechst im Textfluss mit (alle Kacheln werden beim Scrollen
+     sichtbar) - erst wenn die letzte durchgelaufen ist, kommt diese Klasse
+     per JS dazu und die Box rastet ein. Siehe stickyReveal(). */
+  .erg-side.ds-sticky { position: sticky; top: 20px; }
   .erg-side-title { font-family: var(--schrift-titel); font-size: 1.15rem; font-weight: 500; margin: 0 0 6px; color: var(--tinte); }
   .erg-side-sub { font-size: .8rem; color: rgba(24,24,24,.6); margin: 0 0 16px; }
   .erg-mini {
@@ -504,8 +510,16 @@
   .wissen h2 { font-size: clamp(1.4rem, 2.6vw, 1.9rem); font-weight: 800; margin: 0 0 6px; letter-spacing: -.02em; }
   .wissen > .wrap > p { margin: 0 0 26px; color: var(--grau); }
   .wi-gitter { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
-  .wi-karte { background: var(--weiss); border-radius: 10px; overflow: hidden; display: flex; flex-direction: column; }
+  .wi-karte {
+    position: relative; background: var(--weiss); border-radius: 10px; overflow: hidden;
+    display: flex; flex-direction: column; color: inherit; text-decoration: none;
+  }
   .wi-karte img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; display: block; }
+  .wi-tag {
+    position: absolute; top: 12px; left: 12px; z-index: 2;
+    background: var(--zm-gelb); color: var(--tinte); font-size: .68rem; font-weight: 800;
+    letter-spacing: .03em; padding: 5px 10px; border-radius: 999px;
+  }
   .wi-inhalt { padding: 15px 17px 18px; display: flex; flex-direction: column; gap: 7px; flex: 1; }
   .wi-inhalt h3 { margin: 0; font-size: 1rem; font-weight: 800; line-height: 1.25; }
   .wi-inhalt p { margin: 0; font-size: .85rem; color: var(--grau); line-height: 1.5; }
@@ -638,9 +652,10 @@
       </main>
 
       <aside class="erg-side">
-        <div class="erg-side-title">Oder doch erstmal ein 10-Minuten-Praktikum?</div>
-        <div class="erg-side-sub">Digital ausprobieren, bevor du dich bewirbst.</div>
+        <div class="erg-side-title">Oder doch erstmal digital reinschnuppern?</div>
+        <div class="erg-side-sub">Challenges, Interviews, Spiele</div>
         <div id="erg-mini-tiles"></div>
+        <div id="erg-side-sentinel"></div>
         <a href="#zehnmin" class="erg-side-btn">Alle 11 entdecken</a>
       </aside>
     </div>
@@ -655,7 +670,7 @@
     <div class="zm-kopf">
       <div>
         <h2>Digital mal reinschnuppern</h2>
-        <p>Kurze Challenges, Interviews und Spiele aus echten Unternehmen – zum Ausprobieren zwischendurch.</p>
+        <p>Kurze Challenges, Interviews und Spiele aus echten Unternehmen.</p>
       </div>
       <div class="zm-pfeile">
         <button class="zm-pfeil" id="zm-links" type="button" aria-label="Vorherige Kacheln">←</button>
@@ -821,13 +836,15 @@
         </div>
       </div>
 
-      <div class="wi-karte orange">
+      <a class="wi-karte" href="Wissen_Outfit.html">
+        <img src="vorschau_bilder/wissen_outfit.jpg" alt="Outfit-Check fürs Bewerbungsgespräch">
+        <span class="wi-tag">in Kooperation mit SIEYA</span>
         <div class="wi-inhalt">
-          <h3>Das Bewerbungsanschreiben</h3>
-          <p>Dein Anschreiben ist das Erste, was Personalverantwortliche von dir zu Gesicht bekommen. Erfahre hier, wie du mit ihm auf dich neugierig machst.</p>
+          <h3>Outfit zum Bewerbungsgespräch</h3>
+          <p>Bereit für den Auswahltag? Hier findest du den Outfit-Check und Tipps zur Vorbereitung — vom passenden Look bis zur ersten Frage, die dir gestellt wird.</p>
           <div class="wi-pfeil" aria-hidden="true">›</div>
         </div>
-      </div>
+      </a>
 
       <div class="wi-karte">
         <img src="vorschau_bilder/wissen_360.jpg" alt="360-Grad-Welt">
@@ -839,6 +856,9 @@
       </div>
 
       <div class="wi-karte orange">
+        <!-- Foto "SIEYA Lebenslauf.png" fehlt noch im Projektordner - Tag
+             steht schon, Foto folgt sobald die Datei da ist. -->
+        <span class="wi-tag">in Kooperation mit SIEYA</span>
         <div class="wi-inhalt">
           <h3>Du brauchst einen Lebenslauf?</h3>
           <p>Der Lebenslauf gibt Personalverantwortlichen einen Überblick darüber, wer du bist und was du kannst. Erfahre, worauf es ankommt.</p>
@@ -1191,13 +1211,39 @@
   function seitenspalteRendern() {
     const ziel = document.getElementById("erg-mini-tiles");
     if (!ziel) return;
-    ziel.innerHTML = mischen(DIGITAL_POOL).slice(0, 3).map(t => `
+    // Alle neun statt nur drei - beim Runterscrollen soll jede Kachel einmal
+    // vorbeikommen, nicht nur eine zufaellige Auswahl.
+    ziel.innerHTML = mischen(DIGITAL_POOL).map(t => `
       <a class="erg-mini" href="${t.href}" target="_blank" rel="noopener">
         <img class="${t.pos}" src="vorschau_bilder/${t.img}" alt="">
         <div class="erg-mini-label">${t.titel}</div>
         <div class="erg-mini-sub">${t.firma}</div>
       </a>`).join("");
   }
+
+  // Die gelbe Box laeuft zunaechst ganz normal im Textfluss mit, damit beim
+  // Runterscrollen nacheinander alle Kacheln sichtbar werden. Erst wenn die
+  // letzte Kachel oben aus dem Bild gelaufen ist, rastet die Box ein (native
+  // position:sticky kann dieses "erst normal, dann fest" nicht von allein,
+  // deshalb der Sentinel + Scroll-Check).
+  function stickyReveal(box, sentinel, versatz) {
+    if (!box || !sentinel) return;
+    let angefordert = false;
+    function pruefen() {
+      angefordert = false;
+      box.classList.toggle("ds-sticky", sentinel.getBoundingClientRect().top < versatz);
+    }
+    document.addEventListener("scroll", () => {
+      if (!angefordert) { requestAnimationFrame(pruefen); angefordert = true; }
+    }, { passive: true });
+    // Backstop: manche Browser liefern getBoundingClientRect() im
+    // scroll-Handler nicht immer sofort aktuell (Layout haengt der
+    // Scrollposition kurz hinterher) - ein Intervall faengt das ab, statt
+    // dass die Box im falschen Zustand haengen bleibt.
+    setInterval(pruefen, 300);
+    pruefen();
+  }
+  stickyReveal(document.querySelector(".erg-side"), document.getElementById("erg-side-sentinel"), 20);
 
   /* Deutschlandweit dieselbe Leiste: Diese Ketten haben ein Angebot, aber
      keine belastbare Adresse in der Naehe. Der Text sagt genau das. */

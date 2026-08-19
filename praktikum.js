@@ -61,19 +61,21 @@ var ZM_POOL = [
   },
 ];
 
-function zmZufallsdrei() {
+function zmGemischt() {
   var pool = ZM_POOL.slice();
   for (var i = pool.length - 1; i > 0; i--) {
     var j = Math.floor(Math.random() * (i + 1));
     var tmp = pool[i]; pool[i] = pool[j]; pool[j] = tmp;
   }
-  return pool.slice(0, 3);
+  return pool;
 }
 
 function zmKachelnRendern() {
   var ziel = document.getElementById("side-mini-tiles");
   if (!ziel) return;
-  zmZufallsdrei().forEach(function (t) {
+  // Alle neun statt nur drei - beim Runterscrollen soll jede Kachel einmal
+  // vorbeikommen, nicht nur eine zufaellige Auswahl.
+  zmGemischt().forEach(function (t) {
     var a = document.createElement("a");
     a.className = "mini-tile";
     a.href = t.href;
@@ -85,6 +87,32 @@ function zmKachelnRendern() {
       '<div class="mini-tile-sub">' + t.sub + "</div>";
     ziel.appendChild(a);
   });
+}
+
+// Die gelbe Box laeuft zunaechst ganz normal im Textfluss mit, damit beim
+// Runterscrollen nacheinander alle Kacheln sichtbar werden. Erst wenn die
+// letzte Kachel oben aus dem Bild gelaufen ist, rastet die Box ein (native
+// position:sticky kann dieses "erst normal, dann fest" nicht von allein,
+// deshalb der Sentinel + Scroll-Check - identisch zur Suchseite).
+function zmStickyReveal() {
+  var box = document.getElementById("side-col");
+  var sentinel = document.getElementById("side-col-sentinel");
+  if (!box || !sentinel) return;
+  var versatz = 20;
+  var angefordert = false;
+  function pruefen() {
+    angefordert = false;
+    box.classList.toggle("ds-sticky", sentinel.getBoundingClientRect().top < versatz);
+  }
+  document.addEventListener("scroll", function () {
+    if (!angefordert) { requestAnimationFrame(pruefen); angefordert = true; }
+  }, { passive: true });
+  // Backstop: manche Browser liefern getBoundingClientRect() im
+  // scroll-Handler nicht immer sofort aktuell (Layout haengt der
+  // Scrollposition kurz hinterher) - ein Intervall faengt das ab, statt
+  // dass die Box im falschen Zustand haengen bleibt.
+  setInterval(pruefen, 300);
+  pruefen();
 }
 
 // Derselbe Hinweis wie auf der Suchseite ("Gleich geht's auf die Seite der
@@ -126,4 +154,5 @@ function zmHinweisVerdrahten() {
 document.addEventListener("DOMContentLoaded", function () {
   zmKachelnRendern();
   zmHinweisVerdrahten();
+  zmStickyReveal();
 });

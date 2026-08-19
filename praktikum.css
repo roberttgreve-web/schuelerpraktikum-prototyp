@@ -37,11 +37,19 @@
       display: grid; grid-template-columns: 7fr 3fr; gap: 0;
       max-width: 1080px; margin: 0 auto; padding: 32px 0 80px; align-items: start;
     }
-    .main-col { min-width: 0; padding: 0 24px; }
+    /* Breadcrumb+h1 stehen in Zeile 1, nur in Spalte 1 - so faengt die
+       Seitenspalte (Zeile 2) automatisch buendig mit dem Fakten-Kasten an,
+       unabhaengig davon, wie viele Zeilen der Firmenname in der h1 braucht. */
+    .main-head { grid-column: 1; grid-row: 1; min-width: 0; padding: 0 24px; }
+    .main-col { grid-column: 1; grid-row: 2; min-width: 0; padding: 0 24px; }
     .side-col {
-      min-width: 0; background: var(--yellow); border-radius: 20px;
+      grid-column: 2; grid-row: 2; min-width: 0; background: var(--yellow); border-radius: 20px;
       padding: 24px 22px; margin-right: 24px;
     }
+    /* Laeuft zunaechst im Textfluss mit (alle Kacheln werden beim Scrollen
+       sichtbar) - erst wenn die letzte durchgelaufen ist, kommt diese Klasse
+       per JS dazu und die Box rastet ein. Siehe zmStickyReveal() in praktikum.js. */
+    .side-col.ds-sticky { position: sticky; top: 20px; }
 
     .breadcrumb-row { display: flex; align-items: center; gap: 12px; margin-bottom: 22px; }
 
