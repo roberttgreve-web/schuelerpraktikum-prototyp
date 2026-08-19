@@ -507,14 +507,21 @@
 
   /* ---------- Wissensbereich ---------- */
   .wissen { background: var(--flaeche); padding: 52px 0 58px; }
+  .wissen-kopf { display: flex; align-items: flex-end; justify-content: space-between; gap: 20px; flex-wrap: wrap; margin-bottom: 26px; }
   .wissen h2 { font-size: clamp(1.4rem, 2.6vw, 1.9rem); font-weight: 800; margin: 0 0 6px; letter-spacing: -.02em; }
-  .wissen > .wrap > p { margin: 0 0 26px; color: var(--grau); }
-  .wi-gitter { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .wissen-kopf p { margin: 0; color: var(--grau); }
+  .wissen-kooperation {
+    display: flex; align-items: center; gap: 10px; flex: none;
+    font-size: .82rem; font-weight: 600; color: var(--grau);
+  }
+  .wissen-kooperation img { height: 30px; width: auto; border-radius: 5px; display: block; }
+  .wi-gitter { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
   .wi-karte {
     position: relative; background: var(--weiss); border-radius: 10px; overflow: hidden;
     display: flex; flex-direction: column; color: inherit; text-decoration: none;
   }
   .wi-karte img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; display: block; }
+  .wi-karte img.pos-top { object-position: 50% 15%; }
   .wi-tag {
     position: absolute; top: 12px; left: 12px; z-index: 2;
     background: var(--zm-gelb); color: var(--tinte); font-size: .68rem; font-weight: 800;
@@ -524,18 +531,10 @@
   .wi-inhalt h3 { margin: 0; font-size: 1rem; font-weight: 800; line-height: 1.25; }
   .wi-inhalt p { margin: 0; font-size: .85rem; color: var(--grau); line-height: 1.5; }
   .wi-pfeil { margin-top: auto; padding-top: 8px; color: var(--akzent); font-weight: 800; }
-  /* Orange Textkacheln ohne Foto - wie auf schuelerpraktikum.de */
-  .wi-karte.orange { background: var(--akzent); }
-  .wi-karte.orange .wi-inhalt h3, .wi-karte.orange .wi-inhalt p { color: #fff; }
-  .wi-karte.orange .wi-inhalt p { opacity: .92; }
-  .wi-karte.orange .wi-pfeil { color: #fff; }
-  .wi-karte.breit { grid-column: span 2; }
-  .wi-karte.breit img { aspect-ratio: 21 / 9; }
 
   @media (max-width: 860px) {
     .zm-bahn { grid-auto-columns: 78%; }
     .wi-gitter { grid-template-columns: 1fr; }
-    .wi-karte.breit { grid-column: span 1; }
     .zm-kopf { flex-wrap: wrap; }
     .zm-pfeile { margin-left: 0; }
   }
@@ -823,21 +822,20 @@
      Im Dummy bewusst nicht klickbar. -->
 <section class="wissen">
   <div class="wrap">
-    <h2>Alles rund um deine Bewerbung</h2>
-    <p>Von der ersten Idee bis zum Vorstellungsgespräch.</p>
+    <div class="wissen-kopf">
+      <div>
+        <h2>Alles rund um deine Bewerbung</h2>
+        <p>Von der ersten Idee bis zum Vorstellungsgespräch.</p>
+      </div>
+      <div class="wissen-kooperation">
+        <span>in Kooperation mit</span>
+        <img src="vorschau_bilder/sieya_logo.png" alt="SIEYA">
+      </div>
+    </div>
 
     <div class="wi-gitter">
-      <a class="wi-karte" href="Bewerben_Anruf.html">
-        <img src="vorschau_bilder/wissen_anruf.png" alt="Schülerin telefoniert">
-        <div class="wi-inhalt">
-          <h3>Der Anruf vor der Bewerbung</h3>
-          <p>Mit einem gut vorbereiteten Anruf kannst du die Chance auf dein Wunsch-Praktikum erheblich steigern. Lerne von Nora, wann sich ein Anruf im Unternehmen lohnt und wie er abläuft.</p>
-          <div class="wi-pfeil" aria-hidden="true">›</div>
-        </div>
-      </a>
-
       <a class="wi-karte" href="Wissen_Outfit.html">
-        <img src="vorschau_bilder/wissen_outfit.jpg" alt="Outfit-Check fürs Bewerbungsgespräch">
+        <img class="pos-top" src="vorschau_bilder/wissen_outfit.jpg" alt="Outfit-Check fürs Bewerbungsgespräch">
         <span class="wi-tag">in Kooperation mit SIEYA</span>
         <div class="wi-inhalt">
           <h3>Outfit zum Bewerbungsgespräch</h3>
@@ -846,31 +844,32 @@
         </div>
       </a>
 
-      <div class="wi-karte">
-        <img src="vorschau_bilder/wissen_360.jpg" alt="360-Grad-Welt">
-        <div class="wi-inhalt">
-          <h3>Erlebe deinen Arbeitsplatz in 360°</h3>
-          <p>Erlebe deinen ersten Tag im Beruf in der 360-Grad-Welt — noch bevor du dich bewirbst.</p>
-          <div class="wi-pfeil" aria-hidden="true">›</div>
-        </div>
-      </div>
-
-      <div class="wi-karte orange">
-        <!-- Foto "SIEYA Lebenslauf.png" fehlt noch im Projektordner - Tag
-             steht schon, Foto folgt sobald die Datei da ist. -->
+      <a class="wi-karte" href="https://sieya.siemens.com/video/144" target="_blank" rel="noopener">
+        <img src="vorschau_bilder/wissen_sieya_bewerbung.jpg" alt="So bewirbst du dich richtig">
         <span class="wi-tag">in Kooperation mit SIEYA</span>
         <div class="wi-inhalt">
-          <h3>Du brauchst einen Lebenslauf?</h3>
-          <p>Der Lebenslauf gibt Personalverantwortlichen einen Überblick darüber, wer du bist und was du kannst. Erfahre, worauf es ankommt.</p>
+          <h3>So bewirbst du dich richtig</h3>
+          <p>Du willst dich für eine Ausbildung oder ein Duales Studium bewerben? Dani zeigt dir, was du brauchst.</p>
           <div class="wi-pfeil" aria-hidden="true">›</div>
         </div>
-      </div>
+      </a>
 
-      <a class="wi-karte breit" href="Bewerben_Kleidung.html">
-        <img src="vorschau_bilder/wissen_kleidung.jpg" alt="Kleidung fürs Vorstellungsgespräch">
+      <a class="wi-karte" href="https://sieya.siemens.com/video/145" target="_blank" rel="noopener">
+        <img src="vorschau_bilder/wissen_sieya_lebenslauf.jpg" alt="Tipps zum Lebenslauf">
+        <span class="wi-tag">in Kooperation mit SIEYA</span>
         <div class="wi-inhalt">
-          <h3>Kleidung und Körpersprache im Vorstellungsgespräch</h3>
-          <p>Egal, ob du zum Vorstellungsgespräch gehst oder am ersten Arbeitstag deine Kolleg*innen kennenlernst — der erste Eindruck zählt. Lerne von Luca, wie du die passende Kleidung auswählst.</p>
+          <h3>Tipps zum Lebenslauf</h3>
+          <p>So wird dein Lebenslauf zum Erfolg — die besten Tipps für deine Bewerbung.</p>
+          <div class="wi-pfeil" aria-hidden="true">›</div>
+        </div>
+      </a>
+
+      <a class="wi-karte" href="https://sieya.siemens.com/video/146" target="_blank" rel="noopener">
+        <img src="vorschau_bilder/wissen_sieya_auswahltag.jpg" alt="Auswahltag: So überzeugst du">
+        <span class="wi-tag">in Kooperation mit SIEYA</span>
+        <div class="wi-inhalt">
+          <h3>Auswahltag: So überzeugst du</h3>
+          <p>Am Auswahltag zählt vor allem eins: Sei einfach du selbst.</p>
           <div class="wi-pfeil" aria-hidden="true">›</div>
         </div>
       </a>
