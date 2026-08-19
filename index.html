@@ -402,22 +402,45 @@
      Steht einmal ganz oben, vor dem ersten Entfernungsring. Sie ist ein
      Werbeplatz, kein Suchtreffer - deshalb zaehlt sie in keiner Zahl mit. */
   .karte.premium { border: 1px solid var(--tinte); }
-  /* Eigene Zeile ohne Ringueberschrift, mit etwas mehr Luft nach unten. */
-  .cluster.premiumzeile { margin-bottom: 32px; }
   .pr-bild { position: relative; aspect-ratio: 16 / 10; overflow: hidden; background: var(--flaeche); }
   .pr-bild img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .4s ease; }
   .karte.premium:hover .pr-bild img { transform: scale(1.05); }
   .pr-label {
     position: absolute; left: 10px; top: 10px; z-index: 2;
-    background: var(--tinte); color: #fff; font-size: .68rem; font-weight: 800;
+    background: var(--zm-gelb); color: var(--tinte); font-size: .68rem; font-weight: 800;
     letter-spacing: .03em; padding: 5px 10px; border-radius: 999px;
   }
   .karte.premium .inhalt { padding-top: 12px; }
   .pr-titel { margin: 0; font-size: 1.02rem; font-weight: 800; line-height: 1.2; }
-  .pr-dummy {
-    margin-right: auto; font-size: .68rem; font-weight: 800; letter-spacing: .05em;
-    text-transform: uppercase; color: var(--grau);
-    border: 1px dashed var(--linie); border-radius: 3px; padding: 2px 7px;
+  .pr-cta { margin-right: auto; font-size: .84rem; font-weight: 700; color: var(--akzent); }
+
+  /* ---------- Ergebnisseite: 3/4 Treffer, 1/4 gelbe "Digital reinschnuppern"-Spalte ---------- */
+  .erg-grid { display: grid; grid-template-columns: 7fr 3fr; gap: 24px; align-items: start; }
+  .erg-grid > main { min-width: 0; }
+  .erg-side {
+    min-width: 0; background: var(--zm-gelb); border-radius: 20px; padding: 24px 22px;
+    position: sticky; top: 20px;
+  }
+  .erg-side-title { font-family: var(--schrift-titel); font-size: 1.15rem; font-weight: 500; margin: 0 0 6px; color: var(--tinte); }
+  .erg-side-sub { font-size: .8rem; color: rgba(24,24,24,.6); margin: 0 0 16px; }
+  .erg-mini {
+    display: block; text-decoration: none; color: var(--tinte);
+    border: 1px solid rgba(24,24,24,.08); border-radius: 14px; overflow: hidden; background: var(--weiss);
+    margin-bottom: 12px; transition: all .15s;
+  }
+  .erg-mini:hover { border-color: var(--akzent); box-shadow: 0 4px 14px rgba(0,0,0,.08); }
+  .erg-mini img { width: 100%; height: 110px; object-fit: cover; display: block; }
+  .erg-mini-label { padding: 10px 12px 0; font-size: .82rem; font-weight: 700; line-height: 1.25; }
+  .erg-mini-sub { padding: 6px 12px 12px; font-size: .72rem; color: rgba(24,24,24,.55); }
+  .erg-side-btn {
+    display: block; text-align: center; width: 100%; margin-top: 6px;
+    background: var(--weiss); color: var(--tinte); border: 1.5px solid rgba(24,24,24,.15);
+    border-radius: 100px; padding: 11px 18px; font-weight: 700; font-size: .86rem; text-decoration: none;
+  }
+  .erg-side-btn:hover { border-color: var(--akzent); color: var(--akzent); }
+  @media (max-width: 860px) {
+    .erg-grid { grid-template-columns: 1fr; }
+    .erg-side { position: static; }
   }
 
   /* ---------- Das 10-Minuten-Praktikum ---------- */
@@ -598,7 +621,7 @@
       </div>
     </div>
 
-    <div>
+    <div class="erg-grid">
       <main>
         <div id="cluster"></div>
         <div class="keine" id="keine" hidden>Mit diesen Filtern bleibt nichts übrig. Nimm einen Haken weg.</div>
@@ -615,6 +638,13 @@
         </section>
 
       </main>
+
+      <aside class="erg-side">
+        <div class="erg-side-title">Oder doch erstmal ein 10-Minuten-Praktikum?</div>
+        <div class="erg-side-sub">Digital ausprobieren, bevor du dich bewirbst.</div>
+        <div id="erg-mini-tiles"></div>
+        <a href="#zehnmin" class="erg-side-btn">Alle 11 entdecken</a>
+      </aside>
     </div>
   </div>
 </section>
@@ -622,7 +652,7 @@
 <!-- Zweite Ebene: das kostenpflichtige Premium-Modul der Unternehmen.
      Acht Kacheln, drei sichtbar, der Rest wird nach rechts gescrollt.
      Verlinkt sind die drei fertigen Folgen; der Rest sind Platzhalter. -->
-<section class="zehnmin">
+<section class="zehnmin" id="zehnmin">
   <div class="wrap">
     <div class="zm-kopf">
       <div>
@@ -1077,23 +1107,98 @@
 
   const FARBEN = ["k1","k2","k3","k4","k5","k6"];
 
-  // Bezahlter Platz an der Spitze der Ergebnisse - genau einmal je Anzeige,
-  // nicht je Entfernungscluster: dieselbe Karte fuenfmal untereinander liest
-  // sich als Panne, nicht als Angebot. Bewusst ausserhalb von EINTRAEGE
-  // gehalten, damit sie in keiner Zaehlung auftaucht.
-  function premiumKarte(land) {
-    const ort = land === "Berlin" ? "Berlin" : "Schleswig-Holstein";
-    return `<a class="karte premium" href="Zehn_Minuten_Praktikum_SIEMENS.html" target="_blank" rel="noopener">
+  // Pool der "Digital reinschnuppern"-Kacheln (identisch zum Karussell weiter
+  // unten). Nur die neun mit echtem Ziel - die zwei SIEYA-Kacheln haben noch
+  // keine Ziel-URL und wuerden hier ins Leere fuehren.
+  const DIGITAL_POOL = [
+    { href: "Zehn_Minuten_Praktikum_SIEMENS.html", img: "kachel_siemens.jpg", pos: "",
+      tag: "10-Minuten-Praktikum", firma: "Siemens",
+      titel: "Ein Sensor ist kaputt und 20.000 Flaschen warten.", cta: "Challenge starten" },
+    { href: "https://amazonfutureengineer.deinerstertag.de/experiences/virtuelle-tour-bei-amazon-music/", img: "kachel_amazon.webp", pos: "",
+      tag: "Interviews", firma: "Amazon Music",
+      titel: "Wer entdeckt Stars wie Nina Chuba? Die Menschen hinter Amazon Music.", cta: "Loslegen" },
+    { href: "Zehn_Minuten_Praktikum_AUTOEDER.html", img: "kachel_autoeder.jpg", pos: "pos-right",
+      tag: "10-Minuten-Challenge", firma: "Auto Eder",
+      titel: "Der Anlasser ist kaputt. Findest du das Problem.", cta: "Challenge lösen" },
+    { href: "Zehn_Minuten_Praktikum_UKMV.html", img: "kachel_ukmv.jpg", pos: "",
+      tag: "10-Minuten-Challenge", firma: "Unfallkasse MV",
+      titel: "Jonas ist im Sportunterricht gestürzt. Wer zahlt jetzt.", cta: "Challenge lösen" },
+    { href: "https://amazonfutureengineer.deinerstertag.de/experiences/virtuelle-tour-bei-audible/", img: "kachel_audible.jpeg", pos: "",
+      tag: "Interviews", firma: "Audible",
+      titel: "Wie entsteht ein Hit-Hörbuch? Dein Blick hinter die Kulissen von Audible.", cta: "Loslegen" },
+    { href: "https://amazonfutureengineer.deinerstertag.de/experiences/virtuelle-tour-durch-amazon-mgm-studios/", img: "kachel_mgm.webp", pos: "",
+      tag: "Interviews", firma: "Amazon MGM Studios",
+      titel: "Wie entsteht ein Blockbuster? Schau hinter die Kulissen von Amazon MGM Studios!", cta: "Loslegen" },
+    { href: "https://amazonfutureengineer.deinerstertag.de/experiences/virtuelle-tour-durch-aws/", img: "kachel_aws.webp", pos: "",
+      tag: "Interviews", firma: "AWS",
+      titel: "Wie entsteht eine KI-Lösung bei AWS – und welche Tech-Jobs stecken dahinter?", cta: "Loslegen" },
+    { href: "https://amazonfutureengineer.deinerstertag.de/experiences/virtuelle-tour-durch-ein-rechenzentrum/", img: "kachel_rechenzentrum.webp", pos: "",
+      tag: "Interviews", firma: "Amazon Rechenzentrum",
+      titel: "Wer bringt deine Lieblingsserie ins Wohnzimmer? Entdecke die Cloud-Profis!", cta: "Loslegen" },
+    { href: "https://amazonfutureengineer.deinerstertag.de/experiences/virtuelle-tour-durch-ein-logistikzentrum/", img: "kachel_logistik.webp", pos: "",
+      tag: "Interviews", firma: "Amazon Logistikzentrum",
+      titel: "Wie werden Pakete intelligent sortiert? Entdecke die Tech hinter Amazons Logistik!", cta: "Loslegen" },
+  ];
+
+  function mischen(arr) {
+    const a = arr.slice();
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  }
+
+  // Einmal je Seitenaufruf gemischt, dann reihum verteilt - so wiederholt sich
+  // keine Kachel, bevor nicht alle neun einmal dran waren.
+  const DIGITAL_REIHENFOLGE = mischen(DIGITAL_POOL.map((_, i) => i));
+  let digitalCursor = 0;
+  function naechsteDigitale() {
+    const t = DIGITAL_POOL[DIGITAL_REIHENFOLGE[digitalCursor % DIGITAL_REIHENFOLGE.length]];
+    digitalCursor++;
+    return t;
+  }
+
+  function digitaleKachel(t) {
+    return `<a class="karte premium" href="${t.href}" target="_blank" rel="noopener">
       <div class="pr-bild">
-        <span class="pr-label">Das 10-Minuten-Praktikum</span>
-        <img src="vorschau_bilder/kachel_siemens.jpg" alt="Zwei junge Leute an einer Automatisierungsanlage">
+        <span class="pr-label">${t.tag}</span>
+        <img src="vorschau_bilder/${t.img}" alt="">
       </div>
       <div class="inhalt">
-        <div class="meta">Siemens · ${ort}</div>
-        <p class="pr-titel">Elektroniker*in für Automatisierungstechnik</p>
-        <p class="text">Bei einem Kunden steht die Abfüllanlage still. Löse den Fall in 10 Minuten — ohne Bewerbung, ohne Anfahrt.</p>
-        <div class="fusszeile"><span class="pr-dummy">Dummy</span><span class="pfeil">›</span></div>
+        <div class="meta">${t.firma} · Digital reinschnuppern</div>
+        <p class="pr-titel">${t.titel}</p>
+        <div class="fusszeile"><span class="pr-cta">${t.cta}</span><span class="pfeil">›</span></div>
       </div></a>`;
+  }
+
+  // Streut eine Digital-Kachel an jede siebte Position im Ergebnisstrom ein -
+  // ueber alle Entfernungsringe hinweg gezaehlt, nicht je Ring neu bei 1.
+  // Modulweite Variable, weil zeichnen() sie bei jedem Ring-Durchlauf
+  // weiterzaehlt und nur einmal pro Aufruf auf 0 zuruecksetzt.
+  let kartenPosition = 0;
+  function mitDigitalenKacheln(kartenHtml) {
+    let out = "";
+    for (const k of kartenHtml) {
+      kartenPosition++;
+      if (kartenPosition % 7 === 0) {
+        out += digitaleKachel(naechsteDigitale());
+        kartenPosition++;
+      }
+      out += k;
+    }
+    return out;
+  }
+
+  function seitenspalteRendern() {
+    const ziel = document.getElementById("erg-mini-tiles");
+    if (!ziel) return;
+    ziel.innerHTML = mischen(DIGITAL_POOL).slice(0, 3).map(t => `
+      <a class="erg-mini" href="${t.href}" target="_blank" rel="noopener">
+        <img class="${t.pos}" src="vorschau_bilder/${t.img}" alt="">
+        <div class="erg-mini-label">${t.titel}</div>
+        <div class="erg-mini-sub">${t.firma}</div>
+      </a>`).join("");
   }
 
   /* Deutschlandweit dieselbe Leiste: Diese Ketten haben ein Angebot, aber
@@ -1157,9 +1262,9 @@
     const schritt = radius / 5;
     const behaelter = document.getElementById("cluster");
     let filialbahnGesetzt = false;
-    // Die Premium-Karte steht einmal ganz oben, vor allen Entfernungsringen.
-    let html = `<section class="cluster premiumzeile"><div class="karten">${premiumKarte(land)}</div></section>`;
+    let html = "";
     let farbzaehler = 0;
+    kartenPosition = 0;
     for (let n = 1; n <= 5; n++) {
       const von = schritt * (n - 1), bis = schritt * n;
       // Der erste Ring beginnt bei 0, nicht darueber: Eine Filiale in
@@ -1168,8 +1273,9 @@
       const drin = liste.filter(t => (n === 1 ? t.km >= von : t.km > von) && t.km <= bis);
       if (!drin.length) continue;
       const titel = n === 1 ? `Bis ${Math.round(bis)} km` : `${Math.round(von)} bis ${Math.round(bis)} km`;
+      const kartenDieserRing = drin.map(t => karte({...t, farbe: FARBEN[farbzaehler++ % 6]}));
       html += `<section class="cluster"><h3>${titel}<span>${drin.length} Organisation${drin.length === 1 ? "" : "en"}</span></h3>
-        <div class="karten">${drin.map(t => karte({...t, farbe: FARBEN[farbzaehler++ % 6]})).join("")}</div></section>`;
+        <div class="karten">${mitDigitalenKacheln(kartenDieserRing)}</div></section>`;
       // Direkt nach dem ersten Ring: Die Ketten stehen hier bewusst ohne
       // Entfernung, weil sie ueberall sind - nicht nur dort, wo Places
       // zufaellig eine Adresse ausgeworfen hat.
@@ -1178,6 +1284,7 @@
     if (!filialbahnGesetzt && FILIALKETTEN.length) html += filialbahn();
     behaelter.innerHTML = html;
     behaelter.querySelectorAll(".fi-bahn").forEach(fiPfeileAktualisieren);
+    seitenspalteRendern();
 
     // Ketten: keine Entfernung, deshalb eigener Abschnitt ganz unten
     document.getElementById("kettenBereich").hidden = !ketten.length;
