@@ -45,6 +45,7 @@
     --weiss: #FFFFFF;
     --linie: #CFD7D8;
     --cyan: #6CA0FF;
+    --zm-gelb: #FFEC5C;
 
     /* Die sechs Kartenfarben kommen aus derselben Palette wie die Marke:
        Blau, Orange, Rot, Hellblau, Gelb (fuer Linien abgedunkelt) und Dunkelblau. */
@@ -461,7 +462,7 @@
   }
   .zm-dauer {
     position: absolute; top: 12px; left: 12px; z-index: 2;
-    background: rgba(255,255,255,.94); color: var(--tinte); font-size: .72rem; font-weight: 800;
+    background: var(--zm-gelb); color: var(--tinte); font-size: .72rem; font-weight: 800;
     padding: 5px 10px; border-radius: 999px; letter-spacing: .02em;
   }
   .zm-firma {
@@ -625,8 +626,8 @@
   <div class="wrap">
     <div class="zm-kopf">
       <div>
-        <h2>Das 10-Minuten-Praktikum</h2>
-        <p>Schnupper doch erstmal digital kurz in einen Beruf rein.</p>
+        <h2>Digital mal reinschnuppern</h2>
+        <p>Kurze Challenges, Interviews und Spiele aus echten Unternehmen – zum Ausprobieren zwischendurch.</p>
       </div>
       <div class="zm-pfeile">
         <button class="zm-pfeil" id="zm-links" type="button" aria-label="Vorherige Kacheln">←</button>
@@ -638,65 +639,138 @@
 
       <a class="zm-kachel" href="Zehn_Minuten_Praktikum_SIEMENS.html" target="_blank" rel="noopener">
         <div class="zm-bild">
-          <span class="zm-dauer">10 Min</span>
+          <span class="zm-dauer">10-Minuten-Praktikum</span>
           <img src="vorschau_bilder/kachel_siemens.jpg" alt="Zwei junge Leute an einer Automatisierungsanlage">
           <span class="zm-firma">Siemens</span>
         </div>
         <div class="zm-text">
-          <h3>Elektroniker*in für Automatisierungstechnik</h3>
-          <div class="zm-fuss">Reinschauen <span aria-hidden="true">›</span></div>
+          <h3>Ein Sensor ist kaputt und 20.000 Flaschen warten.</h3>
+          <div class="zm-fuss">Challenge starten <span aria-hidden="true">›</span></div>
         </div>
       </a>
 
+      <a class="zm-kachel" href="https://amazonfutureengineer.deinerstertag.de/experiences/virtuelle-tour-bei-amazon-music/" target="_blank" rel="noopener">
+        <div class="zm-bild">
+          <span class="zm-dauer">Interviews</span>
+          <img src="vorschau_bilder/kachel_amazon.webp" alt="Studio bei Amazon Music">
+          <span class="zm-firma">Amazon Music</span>
+        </div>
+        <div class="zm-text">
+          <h3>Wer entdeckt Stars wie Nina Chuba? Die Menschen hinter Amazon Music.</h3>
+          <div class="zm-fuss">Loslegen <span aria-hidden="true">›</span></div>
+        </div>
+      </a>
+
+      <!-- SIEYA-Minigame: Story steht, Ziel-URL fehlt noch - deshalb erstmal
+           ohne Link, wie von Robert vorgegeben. -->
+      <div class="zm-kachel gesperrt">
+        <div class="zm-bild">
+          <span class="zm-dauer">Coding-Spiel</span>
+          <img src="vorschau_bilder/kachel_sieya_coding.png" alt="Spielszene aus dem SIEYA Coding-Spiel">
+          <span class="zm-firma">SIEYA</span>
+        </div>
+        <div class="zm-text">
+          <h3>2174: Rette die Menschheit – steuere den Roboter durchs Chaos.</h3>
+          <div class="zm-fuss">Starte mit coden</div>
+        </div>
+      </div>
+
+      <!-- SIEYA Bewerbungstipps: ebenfalls noch ohne Ziel-URL. -->
+      <div class="zm-kachel gesperrt">
+        <div class="zm-bild">
+          <span class="zm-dauer">Online lernen</span>
+          <img src="vorschau_bilder/kachel_sieya_bewerben.png" alt="Lernmaterial zur Bewerbung von SIEYA">
+          <span class="zm-firma">SIEYA</span>
+        </div>
+        <div class="zm-text">
+          <h3>Tipps für deinen Lebenslauf</h3>
+          <div class="zm-fuss">Jetzt lernen</div>
+        </div>
+      </div>
+
       <a class="zm-kachel" href="Zehn_Minuten_Praktikum_AUTOEDER.html" target="_blank" rel="noopener">
         <div class="zm-bild">
-          <span class="zm-dauer">10 Min</span>
+          <span class="zm-dauer">10-Minuten-Challenge</span>
           <img src="vorschau_bilder/kachel_autoeder.jpg" alt="Autohaus der Auto Eder Gruppe">
           <span class="zm-firma">Auto Eder</span>
         </div>
         <div class="zm-text">
-          <h3>Kfz-Mechatroniker*in</h3>
-          <div class="zm-fuss">Reinschauen <span aria-hidden="true">›</span></div>
+          <h3>Der Anlasser ist kaputt. Findest du das Problem.</h3>
+          <div class="zm-fuss">Challenge lösen <span aria-hidden="true">›</span></div>
+        </div>
+      </a>
+
+      <a class="zm-kachel" href="https://amazonfutureengineer.deinerstertag.de/experiences/virtuelle-tour-bei-audible/" target="_blank" rel="noopener">
+        <div class="zm-bild">
+          <span class="zm-dauer">Interviews</span>
+          <img src="vorschau_bilder/kachel_audible.jpeg" alt="Studioaufnahme bei Audible">
+          <span class="zm-firma">Audible</span>
+        </div>
+        <div class="zm-text">
+          <h3>Wie entsteht ein Hit-Hörbuch? Dein Blick hinter die Kulissen von Audible.</h3>
+          <div class="zm-fuss">Loslegen <span aria-hidden="true">›</span></div>
         </div>
       </a>
 
       <a class="zm-kachel" href="Zehn_Minuten_Praktikum_UKMV.html" target="_blank" rel="noopener">
         <div class="zm-bild">
-          <span class="zm-dauer">10 Min</span>
+          <span class="zm-dauer">10-Minuten-Challenge</span>
           <img src="vorschau_bilder/kachel_ukmv.jpg" alt="Auszubildende der UK MV im Seminarraum">
           <span class="zm-firma">Unfallkasse MV</span>
         </div>
         <div class="zm-text">
-          <h3>Sozialversicherungsfachangestellte*r</h3>
-          <div class="zm-fuss">Reinschauen <span aria-hidden="true">›</span></div>
+          <h3>Jonas ist im Sportunterricht gestürzt. Wer zahlt jetzt.</h3>
+          <div class="zm-fuss">Challenge lösen <span aria-hidden="true">›</span></div>
         </div>
       </a>
 
-      <!-- PORR ist gebaut, aber noch auf dem alten Stand - deshalb hier ohne
-           Verweis, bis die Folge nachgezogen ist. -->
-      <div class="zm-kachel gesperrt">
+      <a class="zm-kachel" href="https://amazonfutureengineer.deinerstertag.de/experiences/virtuelle-tour-durch-amazon-mgm-studios/" target="_blank" rel="noopener">
         <div class="zm-bild">
-          <span class="zm-dauer">10 Min</span>
-          <img src="vorschau_bilder/kachel_porr.png" alt="Azubi in Arbeitskleidung auf der Baustelle">
-          <span class="zm-firma">PORR</span>
+          <span class="zm-dauer">Interviews</span>
+          <img src="vorschau_bilder/kachel_mgm.webp" alt="Filmset bei Amazon MGM Studios">
+          <span class="zm-firma">Amazon MGM Studios</span>
         </div>
         <div class="zm-text">
-          <h3>Straßenbauer*in</h3>
-          <div class="zm-fuss">Bald verfügbar</div>
+          <h3>Wie entsteht ein Blockbuster? Schau hinter die Kulissen von Amazon MGM Studios!</h3>
+          <div class="zm-fuss">Loslegen <span aria-hidden="true">›</span></div>
         </div>
-      </div>
+      </a>
 
-      <div class="zm-kachel gesperrt">
+      <a class="zm-kachel" href="https://amazonfutureengineer.deinerstertag.de/experiences/virtuelle-tour-durch-aws/" target="_blank" rel="noopener">
         <div class="zm-bild">
-          <span class="zm-dauer">10 Min</span>
-          <img src="vorschau_bilder/kachel_amazon.webp" alt="Studio bei Amazon Music">
-          <span class="zm-firma">Amazon Music</span>
+          <span class="zm-dauer">Interviews</span>
+          <img src="vorschau_bilder/kachel_aws.webp" alt="Team-Gespräch bei Amazon Web Services">
+          <span class="zm-firma">AWS</span>
         </div>
         <div class="zm-text">
-          <h3>Artist Relations Manager*in</h3>
-          <div class="zm-fuss">Bald verfügbar</div>
+          <h3>Wie entsteht eine KI-Lösung bei AWS – und welche Tech-Jobs stecken dahinter?</h3>
+          <div class="zm-fuss">Loslegen <span aria-hidden="true">›</span></div>
         </div>
-      </div>
+      </a>
+
+      <a class="zm-kachel" href="https://amazonfutureengineer.deinerstertag.de/experiences/virtuelle-tour-durch-ein-rechenzentrum/" target="_blank" rel="noopener">
+        <div class="zm-bild">
+          <span class="zm-dauer">Interviews</span>
+          <img src="vorschau_bilder/kachel_rechenzentrum.webp" alt="Ausstellungsraum in einem Amazon-Rechenzentrum">
+          <span class="zm-firma">Amazon Rechenzentrum</span>
+        </div>
+        <div class="zm-text">
+          <h3>Wer bringt deine Lieblingsserie ins Wohnzimmer? Entdecke die Cloud-Profis!</h3>
+          <div class="zm-fuss">Loslegen <span aria-hidden="true">›</span></div>
+        </div>
+      </a>
+
+      <a class="zm-kachel" href="https://amazonfutureengineer.deinerstertag.de/experiences/virtuelle-tour-durch-ein-logistikzentrum/" target="_blank" rel="noopener">
+        <div class="zm-bild">
+          <span class="zm-dauer">Interviews</span>
+          <img src="vorschau_bilder/kachel_logistik.webp" alt="Automatisierte Packstraße im Amazon-Logistikzentrum">
+          <span class="zm-firma">Amazon Logistikzentrum</span>
+        </div>
+        <div class="zm-text">
+          <h3>Wie werden Pakete intelligent sortiert? Entdecke die Tech hinter Amazons Logistik!</h3>
+          <div class="zm-fuss">Loslegen <span aria-hidden="true">›</span></div>
+        </div>
+      </a>
 
       <div class="zm-kachel gesperrt">
         <div class="zm-bild">
@@ -1225,6 +1299,10 @@
     const karte = e.target.closest(".karte");
     if (!karte) return;
     if (karte.classList.contains("premium")) return;        // fuehrt nicht auf eine Organisationsseite
+    // Fuehrt der Klick auf unsere eigene Zwischenseite (praktikum/...), ist es
+    // noch nicht "die Seite der Organisation" - der Hinweis kommt dort erst
+    // beim echten Aussenlink (CTA-Button, siehe praktikum.js).
+    if ((karte.getAttribute("href") || "").startsWith("praktikum/")) return;
     if (sessionStorage.getItem("hinweisGezeigt")) return;   // nur beim ersten Mal
     e.preventDefault();
     sessionStorage.setItem("hinweisGezeigt", "1");

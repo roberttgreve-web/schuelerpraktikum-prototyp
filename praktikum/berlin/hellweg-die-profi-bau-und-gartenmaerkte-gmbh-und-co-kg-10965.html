@@ -84,7 +84,7 @@
       </div>
 
       <div class="cta-row">
-        <a href="https://karriere.hellweg.de/" target="_blank" rel="noopener" class="cta-btn">
+        <a href="https://karriere.hellweg.de/" target="_blank" rel="noopener" class="cta-btn" id="firmenlink">
           Zur Firmenseite für mehr Infos
           <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
         </a>
@@ -121,7 +121,7 @@
       </div>
 
       <div style="margin-top:24px;">
-        <a href="../../index.html" class="cta-btn secondary">Zur ganzen Liste</a>
+        <a href="../../index.html" class="cta-btn secondary">Alle Angebote anzeigen</a>
       </div>
     </div>
 
@@ -131,26 +131,25 @@
         <div class="side-teaser-sub">Digital ausprobieren, bevor du dich bewirbst.</div>
       </div>
 
-      <a href="../../Zehn_Minuten_Praktikum_SIEMENS.html" target="_blank" rel="noopener" class="mini-tile">
-        <img src="../../vorschau_bilder/kachel_siemens.jpg" alt="Siemens" />
-        <div class="mini-tile-label">Ein Sensor ist kaputt — und 20.000 Flaschen warten.</div>
-        <div class="mini-tile-sub">Siemens · Elektroniker*in Automatisierungstechnik</div>
-      </a>
-      <a href="../../Zehn_Minuten_Praktikum_UKMV.html" target="_blank" rel="noopener" class="mini-tile">
-        <img src="../../vorschau_bilder/kachel_ukmv.jpg" alt="Unfallkasse Mecklenburg-Vorpommern" />
-        <div class="mini-tile-label">Jonas ist im Sportunterricht gestürzt. Wer zahlt jetzt?</div>
-        <div class="mini-tile-sub">Unfallkasse MV · Sozialversicherungsfachangestellte*r</div>
-      </a>
-      <a href="../../Zehn_Minuten_Praktikum_AUTOEDER.html" target="_blank" rel="noopener" class="mini-tile">
-        <img class="pos-right" src="../../vorschau_bilder/kachel_autoeder.jpg" alt="Auto Eder Gruppe" />
-        <div class="mini-tile-label">Der Anlasser ist kaputt. Findest du das Problem?</div>
-        <div class="mini-tile-sub">Auto Eder Gruppe · Kfz-Mechatroniker*in</div>
-      </a>
+      <div id="side-mini-tiles"></div>
 
-      <a href="../../index.html" class="cta-btn secondary" style="width:100%;justify-content:center;margin-top:6px;">Zur ganzen Liste</a>
+      <a href="../../index.html" class="cta-btn secondary" style="width:100%;justify-content:center;margin-top:6px;">Alle Angebote anzeigen</a>
     </div>
 
   </div>
 
+  <div class="schleier" id="schleier" hidden>
+    <div class="hinweis" role="dialog" aria-modal="true" aria-labelledby="hinweistext">
+      <button class="schliessen" id="hinweisSchliessen" type="button" aria-label="Hinweis schließen">✕</button>
+      <p id="hinweistext"><b>Gleich geht's auf die Seite der Organisation.</b> Zwei Tipps:</p>
+      <ul class="tipps">
+        <li>Das Praktikum steht nicht immer ganz oben — scroll ruhig runter.</li>
+        <li>Trau dich anzurufen oder zu mailen und zu fragen, ob noch ein Platz frei ist.</li>
+      </ul>
+      <button class="verstanden" id="verstanden" type="button">Verstanden</button>
+    </div>
+  </div>
+
+  <script src="../../praktikum.js" defer></script>
 </body>
 </html>

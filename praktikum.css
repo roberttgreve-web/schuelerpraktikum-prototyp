@@ -111,3 +111,32 @@
     .mini-tile img.pos-right { object-position: 75% 45%; }
     .mini-tile-label { padding: 10px 12px 0; font-size: 13px; font-weight: 700; line-height: 1.2; }
     .mini-tile-sub { padding: 6px 12px 12px; font-size: 11px; color: rgba(24,24,24,0.55); }
+
+    /* ── Hinweis vor dem Sprung zur echten Firmenwebsite ── */
+    .schleier {
+      position: fixed; inset: 0; background: rgba(24,24,24,.55);
+      display: flex; align-items: center; justify-content: center; padding: 20px; z-index: 50;
+    }
+    .hinweis {
+      background: white; max-width: 430px; width: 100%; padding: 26px 26px 22px;
+      border-top: 5px solid var(--brand); position: relative; border-radius: 3px;
+      box-shadow: 0 14px 40px rgba(24,24,24,.3);
+    }
+    .hinweis p { margin: 0; color: rgba(24,24,24,.65); font-size: 1rem; line-height: 1.5; padding-right: 26px; }
+    .hinweis p b { color: var(--dark); font-weight: 800; }
+    .tipps { margin: 12px 0 0; padding-left: 20px; color: rgba(24,24,24,.65); font-size: 1rem; line-height: 1.5; }
+    .tipps li + li { margin-top: 8px; }
+    .verstanden {
+      margin-top: 20px; font: inherit; font-weight: 700; font-size: .96rem; color: #fff;
+      background: var(--brand); border: none; border-radius: 3px;
+      padding: 12px 30px; cursor: pointer;
+    }
+    .verstanden:hover { background: #0099bb; }
+    .verstanden:focus-visible { outline: 2px solid var(--dark); outline-offset: 2px; }
+    .schliessen {
+      position: absolute; top: 8px; right: 8px; width: 34px; height: 34px;
+      font: inherit; font-size: 1.25rem; line-height: 1; color: rgba(24,24,24,.5);
+      background: none; border: none; cursor: pointer; border-radius: 3px;
+    }
+    .schliessen:hover { color: var(--dark); background: var(--light); }
+    .schliessen:focus-visible { outline: 2px solid var(--brand); outline-offset: 1px; }
