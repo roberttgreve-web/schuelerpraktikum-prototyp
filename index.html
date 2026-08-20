@@ -423,10 +423,6 @@
        ("Bis 10 km ...") darueber - Hoehe der Ueberschriftzeile gemessen. */
     margin-top: 37px;
   }
-  /* Laeuft zunaechst im Textfluss mit (alle Kacheln werden beim Scrollen
-     sichtbar) - erst wenn die letzte durchgelaufen ist, kommt diese Klasse
-     per JS dazu und die Box rastet ein. Siehe stickyReveal(). */
-  .erg-side.ds-sticky { position: sticky; top: 20px; }
   .erg-side-title { font-family: var(--schrift-titel); font-size: 1.15rem; font-weight: 500; margin: 0 0 6px; color: var(--tinte); }
   .erg-side-sub { font-size: .8rem; color: rgba(24,24,24,.6); margin: 0 0 16px; }
   .erg-mini {
@@ -662,7 +658,6 @@
         <div class="erg-side-title">Oder doch erstmal digital reinschnuppern?</div>
         <div class="erg-side-sub">Challenges, Interviews, Spiele</div>
         <div id="erg-mini-tiles"></div>
-        <div id="erg-side-sentinel"></div>
         <a href="#zehnmin" class="erg-side-btn">Alle 11 entdecken</a>
       </aside>
     </div>
@@ -1210,30 +1205,6 @@
         <div class="erg-mini-sub">${t.firma}</div>
       </a>`).join("");
   }
-
-  // Die gelbe Box laeuft zunaechst ganz normal im Textfluss mit, damit beim
-  // Runterscrollen nacheinander alle Kacheln sichtbar werden. Erst wenn die
-  // letzte Kachel oben aus dem Bild gelaufen ist, rastet die Box ein (native
-  // position:sticky kann dieses "erst normal, dann fest" nicht von allein,
-  // deshalb der Sentinel + Scroll-Check).
-  function stickyReveal(box, sentinel, versatz) {
-    if (!box || !sentinel) return;
-    let angefordert = false;
-    function pruefen() {
-      angefordert = false;
-      box.classList.toggle("ds-sticky", sentinel.getBoundingClientRect().top < versatz);
-    }
-    document.addEventListener("scroll", () => {
-      if (!angefordert) { requestAnimationFrame(pruefen); angefordert = true; }
-    }, { passive: true });
-    // Backstop: manche Browser liefern getBoundingClientRect() im
-    // scroll-Handler nicht immer sofort aktuell (Layout haengt der
-    // Scrollposition kurz hinterher) - ein Intervall faengt das ab, statt
-    // dass die Box im falschen Zustand haengen bleibt.
-    setInterval(pruefen, 300);
-    pruefen();
-  }
-  stickyReveal(document.querySelector(".erg-side"), document.getElementById("erg-side-sentinel"), 20);
 
   /* Deutschlandweit dieselbe Leiste: Diese Ketten haben ein Angebot, aber
      keine belastbare Adresse in der Naehe. Der Text sagt genau das. */
