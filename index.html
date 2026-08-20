@@ -1294,13 +1294,26 @@
     // Cluster in Fuenfteln des gewaehlten Radius - so passen sie sich der
     // Region an: in Berlin enge Ringe, im Flaechenland weite. Leere entfallen.
     const schritt = radius / 5;
+    // Liegen im engsten 5-km-Umkreis schon mehr als 10 Treffer (dichte Lage,
+    // z.B. Innenstadt), startet die erste Kategorie bei 5 km statt beim
+    // vollen Fuenftel - sonst verschwindet die naehere Umgebung in einem zu
+    // groben ersten Ring. Sonst bleibt es beim bisherigen "Bis 10 km" (= erstes
+    // Fuenftel bei Standardradius 50 km).
+    const engerErsterRing = schritt > 5 && liste.filter(t => t.km <= 5).length > 10;
+    const grenzen = [0];
+    if (engerErsterRing) {
+      const restSchritt = (radius - 5) / 4;
+      grenzen.push(5, 5 + restSchritt, 5 + restSchritt * 2, 5 + restSchritt * 3, radius);
+    } else {
+      grenzen.push(schritt, schritt * 2, schritt * 3, schritt * 4, radius);
+    }
     const behaelter = document.getElementById("cluster");
     let filialbahnGesetzt = false;
     let html = "";
     let farbzaehler = 0;
     kartenPosition = 0;
     for (let n = 1; n <= 5; n++) {
-      const von = schritt * (n - 1), bis = schritt * n;
+      const von = grenzen[n - 1], bis = grenzen[n];
       // Der erste Ring beginnt bei 0, nicht darueber: Eine Filiale in
       // derselben PLZ wie die Schule hat exakt 0 km und fiel sonst durch
       // jeden Ring - in Kiel verschwanden so PENNY und dm.
