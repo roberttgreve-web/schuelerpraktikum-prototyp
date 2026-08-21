@@ -153,3 +153,21 @@
        Browser-Standard fuer [hidden] - das Modal waere immer sichtbar,
        unabhaengig vom hidden-Attribut, das das JS setzt. */
     [hidden] { display: none !important; }
+    /* ---------- Fusszeile (uebernommen fuer alle Unterseiten, 2026-08-21) ---------- */
+    .footer { background: var(--brand); margin-top: 60px; }
+    .footer .wrap { max-width: 1080px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 8px 28px; padding: 22px 20px; }
+    .footer a { color: #fff; text-decoration: none; font-size: .84rem; opacity: .92; }
+    .footer a:hover { text-decoration: underline; opacity: 1; }
+
+    /* ---------- Stadt-/Bundesland-Landingpages ---------- */
+    .lp-intro { max-width: 780px; margin: 0 0 30px; }
+    .lp-intro p { color: rgba(24,24,24,.68); font-size: 1.02rem; line-height: 1.6; }
+    .lp-stat { display: inline-flex; align-items: baseline; gap: 8px; background: var(--light);
+      border-radius: 999px; padding: 8px 18px; font-size: .88rem; font-weight: 600; margin-bottom: 18px; }
+    .lp-stat b { font-size: 1.15rem; color: var(--brand); }
+    .lp-ergebnis-rahmen { border: none; width: 100%; display: block; height: 900px; max-height: 80vh; }
+    .lp-alle-cta { display: flex; justify-content: center; margin: 22px 0 40px; }
+    .lp-alle-cta a { font: inherit; font-weight: 700; font-size: .96rem; color: #fff;
+      background: var(--brand); border: none; border-radius: 3px; padding: 13px 28px;
+      text-decoration: none; }
+    .lp-alle-cta a:hover { background: #0099bb; }
