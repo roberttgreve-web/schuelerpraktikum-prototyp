@@ -445,6 +445,16 @@
      sauber unterbrochen und läuft danach in einer neuen Zeile weiter (siehe
      die zwei .erg-main/.erg-side-Paare im HTML). */
   .filialen-mitte:not(:empty) { grid-column: 1 / -1; }
+  /* Ueberlauf-Zone: Ergebnisse, die ueber das Ende der gelben Box hinausgehen
+     (siehe sidebarAusgleichen()), stehen hier in voller Breite statt in der
+     schmalen 7fr-Spalte - .karten wird dadurch automatisch dreispaltig statt
+     zweispaltig (repeat(auto-fill, minmax(258px,1fr)) reagiert von selbst auf
+     die breitere Flaeche, keine eigene Spaltenregel noetig). */
+  .erg-main-breit { grid-column: 1 / -1; }
+  .erg-main-breit:empty { display: none; }
+  /* Wenn die zweite gelbe Box keine (noch nicht gezeigten) Kacheln mehr hat,
+     bekommt cluster-unten die volle Breite statt einer leeren rechten Spalte. */
+  .erg-main.voll-breite { grid-column: 1 / -1; }
   .erg-side {
     min-width: 0; background: var(--zm-gelb); border-radius: 20px; padding: 24px 22px;
     /* Buendig mit der ersten Kachel-Reihe statt mit der Cluster-Ueberschrift
@@ -675,6 +685,12 @@
         <a href="#zehnmin" class="erg-side-btn">Alle 11 entdecken</a>
       </aside>
 
+      <!-- Ergebnisse, die über das Ende der gelben Box hinausgehen, laufen hier
+           in voller Breite (damit automatisch dreispaltig, siehe .karten-CSS)
+           weiter statt weiter in der schmalen 7fr-Spalte zu stehen (Nutzerfeedback
+           2026-09-02/03, siehe sidebarAusgleichen()). -->
+      <div class="erg-main erg-main-breit" id="cluster-oben-breit"></div>
+
       <!-- Sprengt beide Spalten (siehe .filialen-mitte-CSS) - Filialketten-Kacheln
            landen hier statt in .erg-main, damit sie über die volle Breite gehen
            und die Ergebnis-/Sidebar-Zeile sauber unterbrechen. -->
@@ -702,6 +718,9 @@
         <div class="erg-mini-tiles"></div>
         <a href="#zehnmin" class="erg-side-btn">Alle 11 entdecken</a>
       </aside>
+
+      <!-- Zweite Ueberlauf-Zone, analog zu cluster-oben-breit oben. -->
+      <div class="erg-main erg-main-breit" id="cluster-unten-breit"></div>
     </div>
   </div>
 </section>
@@ -1245,21 +1264,119 @@
     return out;
   }
 
+  function miniKachelHtml(t) {
+    return `<a class="erg-mini" href="${t.href}" target="_blank" rel="noopener">
+      <img class="${t.pos}" src="vorschau_bilder/${t.img}" alt="">
+      <div class="erg-mini-label">${t.titel}</div>
+      <div class="erg-mini-sub">${t.firma}</div>
+    </a>`;
+  }
+
+  function seiteBefuellen(seiteEl, kacheln) {
+    seiteEl.querySelector(".erg-mini-tiles").innerHTML = kacheln.map(miniKachelHtml).join("");
+  }
+
+  // Gleicht EIN Ergebnis-/Sidebar-Paar aus (Nutzerfeedback 2026-09-02/03,
+  // siehe ÜBERGABE.md): die gelbe Box soll nie höher sein als die echten
+  // Ergebnisse daneben (bei wenigen Treffern also auch nur wenige
+  // Digital-Kacheln zeigen, nicht künstlich auffüllen) - UND Ergebnisse, die
+  // über das Ende der Box hinausgehen, sollen stattdessen unterhalb in voller
+  // Breite (dadurch automatisch dreispaltig) weiterlaufen statt weiter in der
+  // schmalen Spalte zu stehen. `abschnitteEl` ist meist == mainEl, bei
+  // cluster-unten aber das innere "-inner"-Element (das eigentliche
+  // Ergebnis-/Kettenraster liegt sonst mit im selben Element wie die
+  // Filter-Leerstände). Gibt zurück, wie viele Kacheln die Box am Ende
+  // tatsächlich zeigt - damit die zweite Box weiß, welche Kacheln schon
+  // "verbraucht" sind.
+  function sidebarAusgleichen(mainEl, seiteEl, breitEl, abschnitteEl) {
+    breitEl.innerHTML = "";
+    const miniZiel = seiteEl.querySelector(".erg-mini-tiles");
+    const mainHoehe = mainEl.getBoundingClientRect().height;
+
+    if (seiteEl.getBoundingClientRect().height > mainHoehe) {
+      // Zu viele Digital-Kacheln fuer so wenig Ergebnisse: von hinten kuerzen,
+      // bis die Box nicht mehr hoeher ist als die Ergebnisspalte daneben.
+      while (miniZiel.children.length > 1 && seiteEl.getBoundingClientRect().height > mainHoehe) {
+        miniZiel.removeChild(miniZiel.lastElementChild);
+      }
+    } else {
+      // Mehr Ergebnisse als die Sidebar hoch ist: alles ab dem ersten
+      // Entfernungs-Abschnitt, der ueber das Sidebar-Ende hinausragt, in die
+      // volle Breite verschieben (Reihenfolge/Header pro Abschnitt bleibt
+      // dabei erhalten, nur die Spaltenbreite aendert sich).
+      const seiteUnten = seiteEl.getBoundingClientRect().bottom;
+      const abschnitte = [...abschnitteEl.querySelectorAll(":scope > .cluster")];
+      const ueberlaufAb = abschnitte.find(a => a.getBoundingClientRect().bottom > seiteUnten);
+      for (let el = ueberlaufAb; el; ) {
+        const naechstes = el.nextElementSibling;
+        breitEl.appendChild(el);
+        el = naechstes;
+      }
+      if (ueberlaufAb && ueberlaufAb === abschnitte[0]) {
+        // Nicht einmal der erste Abschnitt (z.B. "Bis 5 km" in einer dichten
+        // Stadt) passt neben die Sidebar - dann lieber gar keine Box zeigen
+        // statt einer hohen gelben Flaeche neben leerem Raum.
+        seiteEl.hidden = true;
+        miniZiel.innerHTML = "";
+        return 0;
+      }
+    }
+    return miniZiel.children.length;
+  }
+
+  // Unterhalb von 860px steht die Sidebar per CSS (.erg-grid-Media-Query)
+  // gestapelt UNTER statt NEBEN den Ergebnissen - dort gibt es kein "Platz
+  // neben der Box zurueckgewinnen" zu berechnen, jede Hoehen-/Ueberlauf-
+  // Messung waere bedeutungslos (mainEl/seiteEl faengt dann an komplett
+  // unterschiedlichen Y-Positionen an). Deckt sich mit dem CSS-Breakpoint.
+  function istZweispaltig() {
+    return window.innerWidth > 860;
+  }
+
   function seitenspalteRendern() {
-    // Zwei Sidebar-Boxen (vor und nach der Filialen-Unterbrechung, siehe
-    // .erg-side) statt nur einer - jede bekommt ihre eigene, unabhaengig
-    // gemischte Kachelauswahl, damit die zweite Box nicht die exakt gleichen
-    // Kacheln zeigt wie die erste.
-    document.querySelectorAll(".erg-mini-tiles").forEach(ziel => {
-      // Alle neun statt nur drei - beim Runterscrollen soll jede Kachel einmal
-      // vorbeikommen, nicht nur eine zufaellige Auswahl.
-      ziel.innerHTML = mischen(DIGITAL_POOL).map(t => `
-        <a class="erg-mini" href="${t.href}" target="_blank" rel="noopener">
-          <img class="${t.pos}" src="vorschau_bilder/${t.img}" alt="">
-          <div class="erg-mini-label">${t.titel}</div>
-          <div class="erg-mini-sub">${t.firma}</div>
-        </a>`).join("");
-    });
+    const seiten = document.querySelectorAll(".erg-side");
+    const [seite1, seite2] = seiten;
+    const mainOben = document.getElementById("cluster-oben");
+    const breitOben = document.getElementById("cluster-oben-breit");
+    const mainUnten = document.getElementById("cluster-unten");
+    const breitUnten = document.getElementById("cluster-unten-breit");
+    if (!seite1 || !mainOben) return;
+
+    if (!istZweispaltig()) {
+      // Mobil: einfach alle Kacheln zeigen wie bisher, keine Hoehen-/
+      // Ueberlauf-Anpassung noetig (siehe Kommentar oben).
+      if (breitOben) breitOben.innerHTML = "";
+      if (breitUnten) breitUnten.innerHTML = "";
+      mainUnten && mainUnten.classList.remove("voll-breite");
+      const reihenfolgeMobil = mischen(DIGITAL_POOL);
+      seiteBefuellen(seite1, reihenfolgeMobil);
+      if (seite2) { seite2.hidden = false; seiteBefuellen(seite2, mischen(DIGITAL_POOL)); }
+      return;
+    }
+
+    seite1.hidden = false;
+    const reihenfolge1 = mischen(DIGITAL_POOL);
+    seiteBefuellen(seite1, reihenfolge1);
+    const n1 = sidebarAusgleichen(mainOben, seite1, breitOben, mainOben);
+
+    // Zweite Box zeigt genau die Kacheln, die die erste NICHT gezeigt hat -
+    // "kein Inhalt geht verloren, nur auf zwei Boxen ober-/unterhalb des
+    // Filialkastens verteilt" (Nutzerfeedback 2026-09-02/03). Hat die erste
+    // Box schon alle gezeigt, bleibt fuer die zweite nichts uebrig - dann
+    // bekommt cluster-unten die volle Breite statt einer leeren Sidebar.
+    if (seite2 && mainUnten) {
+      const rest = mischen(reihenfolge1.slice(n1));
+      if (rest.length) {
+        seite2.hidden = false;
+        mainUnten.classList.remove("voll-breite");
+        seiteBefuellen(seite2, rest);
+        sidebarAusgleichen(mainUnten, seite2, breitUnten, document.getElementById("cluster-unten-inner"));
+      } else {
+        seite2.hidden = true;
+        mainUnten.classList.add("voll-breite");
+        if (breitUnten) breitUnten.innerHTML = "";
+      }
+    }
   }
 
   /* Deutschlandweit dieselbe Leiste: Diese Ketten haben ein Angebot, aber
@@ -1586,6 +1703,13 @@
     zeichnen();
   })();
 
+  // sidebarAusgleichen() misst echte Pixelhoehen - laeuft die allererste
+  // Zeichnung, bevor die eigene Webfont (font-display: swap) geladen ist,
+  // reflowt der Text danach noch einmal und die gemessenen Hoehen stimmen
+  // nicht mehr. Einmalig neu zeichnen, sobald alle Fonts sicher geladen sind.
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(() => { if (landEl.value) zeichnen(); });
+  }
 </script>
 
 </body>
