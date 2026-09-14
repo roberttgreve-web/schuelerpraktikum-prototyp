@@ -171,3 +171,35 @@
       background: var(--brand); border: none; border-radius: 3px; padding: 13px 28px;
       text-decoration: none; }
     .lp-alle-cta a:hover { background: #0099bb; }
+
+    /* ---------- Verzeichnisseiten (Alle Städte / Alle Bundesländer) ---------- */
+    .verz-intro { max-width: 780px; margin: 0 0 26px; color: rgba(24,24,24,.68); font-size: 1.02rem; line-height: 1.6; }
+    .verz-suche-zeile { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-bottom: 24px; }
+    .verz-suche { flex: 1 1 260px; max-width: 360px; padding: 12px 18px; border: 1.5px solid #e0e0e0;
+      border-radius: 100px; font: inherit; font-size: .95rem; color: var(--dark); }
+    .verz-suche:focus { outline: none; border-color: var(--brand); }
+    .verz-treffer { font-size: .84rem; color: rgba(24,24,24,.5); white-space: nowrap; }
+    .verz-sprung { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 32px; }
+    .verz-sprung a { display: inline-flex; align-items: center; gap: 6px; background: var(--light); color: var(--dark);
+      text-decoration: none; font-size: .82rem; font-weight: 600; padding: 7px 14px; border-radius: 100px;
+      border: 1px solid transparent; transition: all .15s; }
+    .verz-sprung a:hover { border-color: var(--brand); color: var(--brand); }
+    .verz-sprung a b { color: var(--brand); font-weight: 700; }
+    .verz-gruppe { background: #fff; border: 1px solid #eaeaea; border-radius: 16px; padding: 20px 24px;
+      margin-bottom: 18px; scroll-margin-top: 90px; }
+    .verz-gruppe.verz-versteckt { display: none; }
+    .verz-gruppe h2 { display: flex; align-items: center; gap: 10px; }
+    .verz-gruppe h2 .anzahl { font-size: .72rem; font-weight: 700; color: rgba(24,24,24,.45);
+      background: var(--light); padding: 3px 10px; border-radius: 100px; }
+    .verz-chips { display: flex; flex-wrap: wrap; gap: 8px 12px; }
+    .verz-chips a { color: var(--dark); text-decoration: none; font-size: .88rem; padding: 4px 2px;
+      border-bottom: 1.5px solid transparent; transition: all .15s; }
+    .verz-chips a:hover { color: var(--brand); border-color: var(--brand); }
+    .verz-chips a.verz-versteckt { display: none; }
+    .verz-laender-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; }
+    .verz-land-karte { display: flex; align-items: center; justify-content: space-between; gap: 10px;
+      background: #fff; border: 1px solid #eaeaea; border-radius: 16px; padding: 20px 22px; text-decoration: none;
+      color: var(--dark); transition: all .15s; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
+    .verz-land-karte:hover { border-color: var(--brand); box-shadow: 0 4px 14px rgba(0,0,0,0.06); transform: translateY(-1px); }
+    .verz-land-karte .name { font-family: var(--schrift-titel); font-size: 1.02rem; font-weight: 500; }
+    .verz-land-karte .pfeil { color: var(--brand); font-size: 1.2rem; }
