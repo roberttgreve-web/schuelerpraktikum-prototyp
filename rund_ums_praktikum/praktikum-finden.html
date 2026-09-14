@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ein Praktikum finden — Schülerpraktikum.de</title>
+<link rel="stylesheet" href="../site-basis.css">
+
+<style>
+  .artikel-hero { background: var(--weiss); padding: 44px 0 8px; }
+  .artikel-hero .wrap { max-width: 760px; }
+  .brotkrume { font-size: .84rem; color: var(--tinte-weich); margin: 0 0 14px; }
+  .brotkrume a { color: var(--tinte-weich); }
+  .artikel-hero h1 { font-size: clamp(1.7rem, 4vw, 2.3rem); margin: 0 0 18px; line-height: 1.2; }
+  .artikel { max-width: 760px; margin: 0 auto; padding: 8px 24px 64px; }
+  .artikel p { line-height: 1.7; margin: 0 0 20px; color: var(--tinte); }
+  .artikel h2 { font-size: 1.4rem; margin: 40px 0 14px; }
+  .artikel h3 { font-size: 1.15rem; margin: 30px 0 10px; }
+  .artikel ul { padding-left: 22px; margin: 0 0 20px; line-height: 1.7; }
+  .artikel li { margin-bottom: 6px; }
+  .artikel blockquote {
+    margin: 24px 0; padding: 4px 0 4px 20px; border-left: 3px solid var(--akzent);
+    font-style: italic; color: var(--tinte-weich);
+  }
+  .artikel .hinweis {
+    background: var(--zm-gelb); border-radius: 12px; padding: 16px 20px; margin: 28px 0;
+    font-size: .9rem;
+  }
+  .artikel .platzhalter {
+    background: rgba(255,90,60,.12); border: 1px dashed #d9534f; border-radius: 10px;
+    padding: 14px 18px; margin: 18px 0; font-size: .88rem; color: var(--tinte);
+  }
+  .zurueck { display: inline-block; margin-top: 8px; color: var(--akzent); font-weight: 700; text-decoration: none; }
+  .zurueck:hover { text-decoration: underline; }
+  @media (max-width: 700px) { .artikel { padding: 8px 18px 48px; } }
+</style>
+
+</head>
+<body>
+<header class="topbar">
+  <div class="wrap">
+    <a class="marke" href="/">
+      <svg width="34" height="32" viewBox="0 0 52 49" aria-hidden="true"><defs><path id="a" d="M.003.009h39.226V47.58H.003z"/></defs><g fill="none" fill-rule="evenodd"><g transform="translate(11.312 .02)"><mask id="b" fill="#fff"><use xlink:href="#a" xmlns:xlink="http://www.w3.org/1999/xlink"/></mask><path fill="#FFF" d="M39.165 8.134L27.62.036a.15.15 0 0 0-.21.037l-7.723 11.05h2.464c2.099 0 3.706.546 4.822 1.64 1.115 1.092 1.673 2.631 1.673 4.618 0 1.986-.558 3.526-1.673 4.619-1.116 1.092-2.723 1.639-4.822 1.639h-2.875v6.208h-4.859V18.662l-2.187 3.13c.251.648.378 1.387.378 2.22 0 .96-.161 1.829-.484 2.606a5.438 5.438 0 0 1-1.412 2c-.62.554-1.38.985-2.281 1.29a8.822 8.822 0 0 1-2.172.426L.03 39.245a.151.151 0 0 0 .037.21l11.545 8.099a.15.15 0 0 0 .21-.037l27.38-39.173a.151.151 0 0 0-.037-.21" mask="url(#b)"/></g><path fill="#FFF" d="M11.819 33.478l2.355-3.37c-1.424-.325-2.778-.934-4.062-1.83l2.083-3.924c.727.646 1.445 1.126 2.156 1.44.71.315 1.413.472 2.107.472.145 0 .283-.006.415-.018l1.773-2.537c-.1-.193-.26-.372-.477-.536a3.977 3.977 0 0 0-.905-.484 30.09 30.09 0 0 0-1.351-.497 26.925 26.925 0 0 1-1.847-.658 5.8 5.8 0 0 1-1.611-.956 4.436 4.436 0 0 1-1.14-1.502c-.29-.605-.434-1.37-.434-2.297s.152-1.767.458-2.52a5.599 5.599 0 0 1 1.29-1.938c.553-.538 1.23-.956 2.032-1.254.801-.298 1.698-.447 2.69-.447.925 0 1.892.129 2.9.385a12.8 12.8 0 0 1 2.9 1.13l-1.933 3.8c-.53-.431-1.058-.75-1.587-.957a4.21 4.21 0 0 0-1.537-.31c-.628 0-1.14.149-1.537.447-.396.298-.595.687-.595 1.167 0 .331.1.604.298.82.198.215.458.401.78.558.323.158.686.294 1.091.41.405.116.806.24 1.203.372.885.296 1.637.647 2.257 1.053l5.534-7.916a.151.151 0 0 0-.038-.21L15.543 3.273a.15.15 0 0 0-.21.037L.027 25.207a.151.151 0 0 0 .037.21l11.545 8.098a.15.15 0 0 0 .21-.037M34.876 17.401c0-1.556-.893-2.334-2.677-2.334h-1.612v4.669H32.2c1.784 0 2.677-.778 2.677-2.335"/></g></svg>
+      <span>schülerpraktikum.de</span>
+    </a>
+    <nav class="topnav">
+      <a href="/alle-staedte.html">Alle Städte</a>
+      <a href="/alle-bundeslaender.html">Alle Bundesländer</a>
+    </nav>
+  </div>
+</header>
+
+<section class="artikel-hero">
+  <div class="wrap">
+    <p class="brotkrume"><a href="../rund_ums_praktikum/index.html">Rund ums Praktikum</a></p>
+    <h1>Ein Praktikum finden</h1>
+  </div>
+</section>
+<main class="artikel">
+<p>Du möchtest dein Schülerpraktikum absolvieren und bist neugierig auf die Berufswelt? Du willst ein Praktikum finden, das genau zu dir passt und dich bei deiner Berufswahl weiterbringt? Und du hast keine Ahnung, wie du das anstellen sollst? Zum Glück haben wir ein paar Hinweise für dich, wie du dein perfektes Praktikum finden kannst.</p>
+<h2>1. Die Richtung für dein Praktikum finden</h2>
+<p>Bevor du in der Berufswelt anfängst, zu suchen, gilt es erst einmal, in dich hinein zu hören. Das heißt, dir selbst die Fragen zu stellen: Was genau interessiert dich? Welche Fächer machen dir in der Schule am meisten Spaß? Was sind deine Hobbys? Bei welcher Beschäftigung bist du richtig glücklich? Was kannst du gut? An welche Erfahrungen aus Schulprojekten oder Freizeitaktivitäten würdest du im Praktikum gerne anknüpfen? Welcher neuen Herausforderung willst du dich im Praktikum stellen? Natürlich spielen auch die Rahmenbedingungen eine Rolle: Wann hast du wie viel Zeit für das Praktikum? Wo muss es sein, damit du den Praktikumsort gut erreichen kannst?</p>
+<p>Es gibt zahllose Fragen, die du dir stellen kannst, wenn du ein Praktikum finden möchtest. Soll dich dein Praktikum wirklich weiterbringen, ist es wichtig zu wissen, was du willst. Schreib dir ruhig ein paar Dinge auf. Manchmal verschafft es Klarheit, wenn du Gedanken zu Papier bringst.</p>
+<p><em>Tipp: Nimm dir bewusst Zeit für diese erste Selbstreflexion, bevor du direkt mit der Suche loslegst - das erspart dir später Umwege.</em></p>
+<h2>2. Deine Möglichkeiten bei der Praktikumssuche</h2>
+<p>Wenn du eine Vorstellung davon hast, in welchem Bereich du während deines Schülerpraktikums gerne einen Einblick bekommen möchtest, willst du natürlich das passende Praktikum finden. Also gilt es, deine Fühler auszustrecken. Sprich zum Beispiel mit deinen Eltern, Geschwistern und Verwandten über deine Ideen. Frag Freunde und Bekannte nach ihren Erfahrungen mit Unternehmen in diesem Bereich. Bitte deine Lehrer/innen, die mit dem Thema vertraut sind, um Unterstützung und frag sie, wie du am ehesten ein Praktikum finden kannst.</p>
+<p>Und schließlich: Halte die Augen offen und informiere dich über aktuelle Praktikumsmöglichkeiten. Diese entdeckst du womöglich in Magazinen, im Fernsehen, auf Ausbildungsmessen oder in Berufsinformationszentren. Und, last but not least: im Internet. Zum Beispiel in unserer Praktikumsbörse kannst du dein passendes Praktikum finden.</p>
+<p class="hinweis">Link: Direkt zur Praktikumssuche — intern zur eigenen Suchfunktion, bleibt relevant für die neue Seite</p>
+<h2>3. Das passende Unternehmen für's Praktikum finden</h2>
+<p>Damit sind die Möglichkeiten, wie du ein Praktikum finden kannst, noch lange nicht ausgeschöpft: Wenn du weißt, was du willst, kannst du im Internet ganz gezielt nach Unternehmen suchen, die deinen Vorstellungen entsprechen. Gehe auf die Homepage der Firmen. Im besten Fall findest du dort eine Karriereseite, auf der du checken kannst, ob ihr Profil wirklich deine Interessen widerspiegelt. Welcher Betrieb der richtige für dein Praktikum ist, musst du natürlich selbst für dich entscheiden. Für deine Entscheidung ist es hilfreich, dir folgende Fragen zu beantworten: Was macht der Betrieb genau? Welche Berufstätigkeiten und Perspektiven gibt es dort? Kannst du dich mit seiner Philosophie identifizieren? Was erwarten die Chefs von Mitarbeiter/innen und Praktikant/innen? Wie viele Teammitglieder und Abteilungen gibt es? Ist es eher ein kleines Start-Up oder eine große Organisation mit flachen oder festen Hierarchien?</p>
+<p><em>Tipp: DEIN ERSTER TAG lässt dich Arbeitsplätze in Ausbildungsbetrieben mit kurzen 360°-Videos erleben noch bevor du dich bewirbst. So kannst du sogar mit einer VR-Brille das passende Unternehmen für's Praktikum finden! (Link: Deinerstertag.de ausprobieren)</em></p>
+<h2>Fazit: Ein Praktikum finden – Bewusst suchen lohnt sich.</h2>
+<p>Willst du dein Praktikum finden, solltest du folgende Tipps beachten: - Überlege dir genau, was dir für dein Praktikum wichtig ist und in welchem Bereich du dich einmal praktisch ausprobieren möchtest. - Hol dir Unterstützung bei der Praktikumssuche und recherchiere, wie üblicherweise in deinem ausgewählten Bereich kommuniziert, was gefordert und angeboten wird. - Sieh dir interessante Firmen und ihre Praktikumsangebote genauer an. Gefällt dir, wie sich der Betrieb darstellt, wie er dich anspricht und welche Möglichkeiten er bietet, dann lohnt es sich weitere Informationen zu sammeln und dich schließlich für einen Praktikumsplatz zu bewerben.</p>
+<p><strong>Noch ein Tipp:</strong> Sei bei deiner Suche auf jeden Fall wählerisch. Nur so kannst du wirklich ein Praktikum finden, das gut zu dir passt. Sei dennoch kompromissbereit, wenn nicht alles perfekt ist. Oftmals warten interessante Erfahrungen auf dich, mit denen du vielleicht gar nicht gerechnet hast!</p>
+<p><a class="zurueck" href="../rund_ums_praktikum/index.html">← Rund ums Praktikum</a></p>
+</main>
+<footer class="footer">
+  <div class="wrap">
+    <a href="/ueber-uns/schuelerpraktikum.html">Über uns</a>
+    <a href="/rechtliches/agb.html">AGB</a>
+    <a href="/rechtliches/impressum.html">Impressum</a>
+    <a href="/rechtliches/datenschutz.html">Datenschutzerklärung</a>
+    <a href="/ueber-uns/kontakt.html">Kontakt</a>
+    <a href="https://www.deinerstertag.de/vorfall-melden/" target="_blank" rel="noopener">Vorfall melden</a>
+    <a href="#" onclick="window.spOpenCookieSettings && window.spOpenCookieSettings(); return false;">Cookie-Einstellungen</a>
+  </div>
+</footer>
+<script src="/cookie-consent.js"></script>
+
+</body>
+</html>
