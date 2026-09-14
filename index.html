@@ -536,8 +536,6 @@
   .zm-text { padding: 15px 16px 17px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
   .zm-text h3 { margin: 0; font-size: 1.02rem; font-weight: 800; line-height: 1.22; }
   .zm-fuss { margin-top: auto; display: flex; align-items: center; gap: 7px; font-size: .84rem; font-weight: 700; color: var(--akzent); }
-  .zm-kachel.gesperrt { opacity: .93; }
-  .zm-kachel.gesperrt .zm-fuss { color: var(--grau); font-weight: 600; }
 
   /* ---------- Wissensbereich ---------- */
   .wissen { background: var(--flaeche); padding: 52px 0 58px; }
@@ -768,9 +766,10 @@
         </div>
       </a>
 
-      <!-- SIEYA-Minigame: Story steht, Ziel-URL fehlt noch - deshalb erstmal
-           ohne Link, wie von Robert vorgegeben. -->
-      <div class="zm-kachel gesperrt">
+      <!-- SIEYA-Minigame: per iframe in einer eigenen Seite eingebettet
+           (Zehn_Minuten_Praktikum_SIEYA.html), Ziel-URL am 2026-09-14 von
+           Robert erhalten. -->
+      <a class="zm-kachel" href="Zehn_Minuten_Praktikum_SIEYA.html" target="_blank" rel="noopener">
         <div class="zm-bild">
           <span class="zm-dauer">Coding-Spiel</span>
           <img src="vorschau_bilder/kachel_sieya_coding.png" alt="Spielszene aus dem SIEYA Coding-Spiel">
@@ -778,9 +777,9 @@
         </div>
         <div class="zm-text">
           <h3>2174: Rette die Menschheit – steuere den Roboter durchs Chaos.</h3>
-          <div class="zm-fuss">Starte mit coden</div>
+          <div class="zm-fuss">Starte mit coden <span aria-hidden="true">›</span></div>
         </div>
-      </div>
+      </a>
 
       <a class="zm-kachel" href="Zehn_Minuten_Praktikum_AUTOEDER.html" target="_blank" rel="noopener">
         <div class="zm-bild">
@@ -1186,12 +1185,14 @@
   const FARBEN = ["k1","k2","k3","k4","k5","k6"];
 
   // Pool der "Digital reinschnuppern"-Kacheln (identisch zum Karussell weiter
-  // unten). Nur die neun mit echtem Ziel - die zwei SIEYA-Kacheln haben noch
-  // keine Ziel-URL und wuerden hier ins Leere fuehren.
+  // unten).
   const DIGITAL_POOL = [
     { href: "Zehn_Minuten_Praktikum_SIEMENS.html", img: "kachel_siemens.jpg", pos: "",
       tag: "10-Minuten-Praktikum", firma: "Siemens",
       titel: "Ein Sensor ist kaputt und 20.000 Flaschen warten.", cta: "Challenge starten" },
+    { href: "Zehn_Minuten_Praktikum_SIEYA.html", img: "kachel_sieya_coding.png", pos: "",
+      tag: "Coding-Spiel", firma: "SIEYA",
+      titel: "2174: Rette die Menschheit – steuere den Roboter durchs Chaos.", cta: "Starte mit coden" },
     { href: "https://amazonfutureengineer.deinerstertag.de/experiences/virtuelle-tour-bei-amazon-music/", img: "kachel_amazon.webp", pos: "",
       tag: "Interviews", firma: "Amazon Music",
       titel: "Wer entdeckt Stars wie Nina Chuba? Die Menschen hinter Amazon Music.", cta: "Loslegen" },
