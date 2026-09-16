@@ -1222,13 +1222,19 @@
   }
 
   // Die ersten PRIORITAET_ANZAHL Eintraege (Siemens, Amazon Music,
-  // SIEYA-Coding) stehen auf Wunsch immer zuerst - der Rest wird einmal je
-  // Seitenaufruf gemischt und reihum verteilt, damit sich keine der
-  // restlichen Kacheln wiederholt, bevor nicht alle einmal dran waren.
+  // SIEYA-Coding) stehen auf Wunsch immer zuerst - der Rest wird gemischt
+  // und reihum verteilt, damit sich keine der restlichen Kacheln
+  // wiederholt, bevor nicht alle einmal dran waren. Gilt fuer JEDE Stelle,
+  // die eine Reihenfolge aus DIGITAL_POOL erzeugt (Karussell-Verteilung in
+  // den Ergebnissen UND die gelbe Sidebar, siehe priorisierteReihenfolge()
+  // weiter unten) - sonst zeigt die Sidebar eine andere Reihenfolge als der
+  // Rest der Seite (Nutzerfund 2026-09-16).
   const PRIORITAET_ANZAHL = 3;
+  function priorisierteReihenfolge(pool) {
+    return pool.slice(0, PRIORITAET_ANZAHL).concat(mischen(pool.slice(PRIORITAET_ANZAHL)));
+  }
   const digitalIndizes = DIGITAL_POOL.map((_, i) => i);
-  const DIGITAL_REIHENFOLGE = digitalIndizes.slice(0, PRIORITAET_ANZAHL)
-    .concat(mischen(digitalIndizes.slice(PRIORITAET_ANZAHL)));
+  const DIGITAL_REIHENFOLGE = priorisierteReihenfolge(digitalIndizes);
   let digitalCursor = 0;
   function naechsteDigitale() {
     const t = DIGITAL_POOL[DIGITAL_REIHENFOLGE[digitalCursor % DIGITAL_REIHENFOLGE.length]];
@@ -1355,14 +1361,14 @@
       if (breitOben) breitOben.innerHTML = "";
       if (breitUnten) breitUnten.innerHTML = "";
       mainUnten && mainUnten.classList.remove("voll-breite");
-      const reihenfolgeMobil = mischen(DIGITAL_POOL);
+      const reihenfolgeMobil = priorisierteReihenfolge(DIGITAL_POOL);
       seiteBefuellen(seite1, reihenfolgeMobil);
-      if (seite2) { seite2.hidden = false; seiteBefuellen(seite2, mischen(DIGITAL_POOL)); }
+      if (seite2) { seite2.hidden = false; seiteBefuellen(seite2, priorisierteReihenfolge(DIGITAL_POOL)); }
       return;
     }
 
     seite1.hidden = false;
-    const reihenfolge1 = mischen(DIGITAL_POOL);
+    const reihenfolge1 = priorisierteReihenfolge(DIGITAL_POOL);
     seiteBefuellen(seite1, reihenfolge1);
     const n1 = sidebarAusgleichen(mainOben, seite1, breitOben,
       [...mainOben.querySelectorAll(":scope > .cluster")]);
