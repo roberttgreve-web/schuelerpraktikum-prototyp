@@ -796,18 +796,6 @@
         </div>
       </a>
 
-      <a class="zm-kachel" href="Zehn_Minuten_Praktikum_AUTOEDER.html" target="_blank" rel="noopener">
-        <div class="zm-bild">
-          <span class="zm-dauer">10-Minuten-Challenge</span>
-          <img src="vorschau_bilder/kachel_autoeder.jpg" alt="Autohaus der Auto Eder Gruppe">
-          <span class="zm-firma">Auto Eder</span>
-        </div>
-        <div class="zm-text">
-          <h3>Der Anlasser ist kaputt. Findest du das Problem.</h3>
-          <div class="zm-fuss">Challenge lösen <span aria-hidden="true">›</span></div>
-        </div>
-      </a>
-
       <a class="zm-kachel" href="https://amazonfutureengineer.deinerstertag.de/experiences/virtuelle-tour-bei-audible/" target="_blank" rel="noopener">
         <div class="zm-bild">
           <span class="zm-dauer">Interviews</span>
@@ -817,18 +805,6 @@
         <div class="zm-text">
           <h3>Wie entsteht ein Hit-Hörbuch? Dein Blick hinter die Kulissen von Audible.</h3>
           <div class="zm-fuss">Loslegen <span aria-hidden="true">›</span></div>
-        </div>
-      </a>
-
-      <a class="zm-kachel" href="Zehn_Minuten_Praktikum_UKMV.html" target="_blank" rel="noopener">
-        <div class="zm-bild">
-          <span class="zm-dauer">10-Minuten-Challenge</span>
-          <img src="vorschau_bilder/kachel_ukmv.jpg" alt="Auszubildende der UK MV im Seminarraum">
-          <span class="zm-firma">Unfallkasse MV</span>
-        </div>
-        <div class="zm-text">
-          <h3>Jonas ist im Sportunterricht gestürzt. Wer zahlt jetzt.</h3>
-          <div class="zm-fuss">Challenge lösen <span aria-hidden="true">›</span></div>
         </div>
       </a>
 
@@ -1200,26 +1176,25 @@
   const FARBEN = ["k1","k2","k3","k4","k5","k6"];
 
   // Pool der "Digital reinschnuppern"-Kacheln (identisch zum Karussell weiter
-  // unten).
+  // unten). Die ersten drei (Siemens, Amazon Music, SIEYA-Coding) sind fest
+  // priorisiert - siehe PRIORITAET_ANZAHL unten, das sie unabhaengig von der
+  // Mischung immer an den Anfang stellt. Auto Eder/Unfallkasse MV waren nur
+  // Dummys ohne echten Partner dahinter und wurden am 2026-09-16 auf Roberts
+  // Wunsch entfernt (samt Kacheln im Karussell und den zugehoerigen
+  // Zehn_Minuten_Praktikum_*-Seiten).
   const DIGITAL_POOL = [
     { href: "Zehn_Minuten_Praktikum_SIEMENS.html", img: "kachel_siemens.jpg", pos: "",
       tag: "10-Minuten-Praktikum", firma: "Siemens",
       titel: "Ein Sensor ist kaputt und 20.000 Flaschen warten.", cta: "Challenge starten" },
+    { href: "https://amazonfutureengineer.deinerstertag.de/experiences/virtuelle-tour-bei-amazon-music/", img: "kachel_amazon.webp", pos: "",
+      tag: "Interviews", firma: "Amazon Music",
+      titel: "Wer entdeckt Stars wie Nina Chuba? Die Menschen hinter Amazon Music.", cta: "Loslegen" },
     { href: "Zehn_Minuten_Praktikum_SIEYA.html", img: "kachel_sieya_coding.png", pos: "",
       tag: "Coding-Spiel", firma: "SIEYA",
       titel: "2174: Rette die Menschheit – steuere den Roboter durchs Chaos.", cta: "Starte mit coden" },
     { href: "Zehn_Minuten_Praktikum_SIEYA_SMARTCITY.html", img: "kachel_sieya_smartcity.png", pos: "",
       tag: "Coding-Spiel", firma: "SIEYA",
       titel: "Du bist Bürgermeister*in – verwandle deine Stadt in eine Smart City.", cta: "Stadt umbauen" },
-    { href: "https://amazonfutureengineer.deinerstertag.de/experiences/virtuelle-tour-bei-amazon-music/", img: "kachel_amazon.webp", pos: "",
-      tag: "Interviews", firma: "Amazon Music",
-      titel: "Wer entdeckt Stars wie Nina Chuba? Die Menschen hinter Amazon Music.", cta: "Loslegen" },
-    { href: "Zehn_Minuten_Praktikum_AUTOEDER.html", img: "kachel_autoeder.jpg", pos: "pos-right",
-      tag: "10-Minuten-Challenge", firma: "Auto Eder",
-      titel: "Der Anlasser ist kaputt. Findest du das Problem.", cta: "Challenge lösen" },
-    { href: "Zehn_Minuten_Praktikum_UKMV.html", img: "kachel_ukmv.jpg", pos: "",
-      tag: "10-Minuten-Challenge", firma: "Unfallkasse MV",
-      titel: "Jonas ist im Sportunterricht gestürzt. Wer zahlt jetzt.", cta: "Challenge lösen" },
     { href: "https://amazonfutureengineer.deinerstertag.de/experiences/virtuelle-tour-bei-audible/", img: "kachel_audible.jpeg", pos: "",
       tag: "Interviews", firma: "Audible",
       titel: "Wie entsteht ein Hit-Hörbuch? Dein Blick hinter die Kulissen von Audible.", cta: "Loslegen" },
@@ -1246,9 +1221,14 @@
     return a;
   }
 
-  // Einmal je Seitenaufruf gemischt, dann reihum verteilt - so wiederholt sich
-  // keine Kachel, bevor nicht alle neun einmal dran waren.
-  const DIGITAL_REIHENFOLGE = mischen(DIGITAL_POOL.map((_, i) => i));
+  // Die ersten PRIORITAET_ANZAHL Eintraege (Siemens, Amazon Music,
+  // SIEYA-Coding) stehen auf Wunsch immer zuerst - der Rest wird einmal je
+  // Seitenaufruf gemischt und reihum verteilt, damit sich keine der
+  // restlichen Kacheln wiederholt, bevor nicht alle einmal dran waren.
+  const PRIORITAET_ANZAHL = 3;
+  const digitalIndizes = DIGITAL_POOL.map((_, i) => i);
+  const DIGITAL_REIHENFOLGE = digitalIndizes.slice(0, PRIORITAET_ANZAHL)
+    .concat(mischen(digitalIndizes.slice(PRIORITAET_ANZAHL)));
   let digitalCursor = 0;
   function naechsteDigitale() {
     const t = DIGITAL_POOL[DIGITAL_REIHENFOLGE[digitalCursor % DIGITAL_REIHENFOLGE.length]];
@@ -1502,6 +1482,12 @@
     let filialenHtml = "";
     let farbzaehler = 0;
     kartenPosition = 0;
+    // Wie kartenPosition: einmal je zeichnen()-Aufruf zuruecksetzen, sonst
+    // wuerde der zweite Durchlauf (nach document.fonts.ready, siehe unten)
+    // den Cursor an der Stelle fortsetzen, an der der erste (verworfene)
+    // Durchlauf aufgehoert hat - die priorisierten ersten drei Kacheln
+    // waeren dann im sichtbaren Ergebnis nicht mehr an erster Stelle.
+    digitalCursor = 0;
     if (!gewaehlteSchule) {
       // Kein Anker (z.B. Bundesland-Landingpage ohne Schule/Ort): jeder
       // Eintrag hat km=Infinity, das Fuenftel-Clustering unten wuerde JEDEN

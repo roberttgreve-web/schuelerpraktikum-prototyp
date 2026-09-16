@@ -33,6 +33,21 @@
   .zurueck { display: inline-block; margin-top: 8px; color: var(--akzent); font-weight: 700; text-decoration: none; }
   .zurueck:hover { text-decoration: underline; }
   @media (max-width: 700px) { .artikel { padding: 8px 18px 48px; } }
+
+  /* ---------- Einflugschneise: CTA zur Suche + digitale Kacheln ---------- */
+  .artikel-cta-suche { background: var(--tinte); padding: 40px 0 0; }
+  .cta-inner {
+    max-width: 760px; margin: 0 auto; padding: 0 24px 32px; display: flex; align-items: center;
+    justify-content: space-between; gap: 24px; flex-wrap: wrap;
+  }
+  .cta-inner h2 { color: #fff; margin: 0 0 6px; font-size: 1.3rem; }
+  .cta-inner p { color: rgba(255,255,255,.75); margin: 0; max-width: 440px; }
+  .cta-knopf {
+    flex-shrink: 0; display: inline-flex; align-items: center; gap: 8px; background: var(--akzent);
+    color: #fff; font-weight: 700; padding: 14px 26px; border-radius: 100px; text-decoration: none;
+    white-space: nowrap;
+  }
+  .cta-knopf:hover { background: #0099bb; }
 </style>
 
 </head>
@@ -66,6 +81,7 @@
 <p><strong>Du möchtest einen Vorfall melden</strong> (z.B. einen Missbrauchsverdacht im Zusammenhang mit einem über die Seite gefundenen Praktikum). Nutze dafür bitte vorrangig die dafür vorgesehene Meldemöglichkeit über den Link <a href="https://www.deinerstertag.de/vorfall-melden/">"Vorfall melden"</a> in der Fußzeile.</p>
 <p><a class="zurueck" href="../index.html">← Startseite</a></p>
 </main>
+
 <footer class="footer">
   <div class="wrap">
     <a href="/ueber-uns/schuelerpraktikum.html">Über uns</a>

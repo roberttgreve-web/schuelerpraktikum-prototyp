@@ -33,6 +33,21 @@
   .zurueck { display: inline-block; margin-top: 8px; color: var(--akzent); font-weight: 700; text-decoration: none; }
   .zurueck:hover { text-decoration: underline; }
   @media (max-width: 700px) { .artikel { padding: 8px 18px 48px; } }
+
+  /* ---------- Einflugschneise: CTA zur Suche + digitale Kacheln ---------- */
+  .artikel-cta-suche { background: var(--tinte); padding: 40px 0 0; }
+  .cta-inner {
+    max-width: 760px; margin: 0 auto; padding: 0 24px 32px; display: flex; align-items: center;
+    justify-content: space-between; gap: 24px; flex-wrap: wrap;
+  }
+  .cta-inner h2 { color: #fff; margin: 0 0 6px; font-size: 1.3rem; }
+  .cta-inner p { color: rgba(255,255,255,.75); margin: 0; max-width: 440px; }
+  .cta-knopf {
+    flex-shrink: 0; display: inline-flex; align-items: center; gap: 8px; background: var(--akzent);
+    color: #fff; font-weight: 700; padding: 14px 26px; border-radius: 100px; text-decoration: none;
+    white-space: nowrap;
+  }
+  .cta-knopf:hover { background: #0099bb; }
 </style>
 
 </head>
@@ -76,9 +91,133 @@
 <p>Wie du im Erfahrungsbericht von Laurence siehst, brauchen Kinder nicht nur Aufmerksamkeit und Einfühlungsvermögen, sondern auch pädagogische Begleitung und einen Wechsel zwischen freiem Spiel und gezielter Förderung.</p>
 <p>In deinem Kita-Praktikum kannst du zum einen den Berufsalltag einer Erzieherin/ eines Erziehers kennenlernen und dich zum anderen den Herausforderungen pädagogischer Arbeit stellen. Durch dein Engagement im Kindergarten leistest du deinen Beitrag zur frühkindlichen Bildung von Jungen und Mädchen.</p>
 <p>Wenn du das auch erleben willst, sieh dir in unserer Übersicht den Weg zum Schülerpraktikum im Kindergarten an. Wir wünschen dir viel Erfolg bei der Bewerbung und eine erfahrungsreiche Zeit im Kindergarten!</p>
-<p>--- (Hinweis: enthält ein eingebettetes 360°-Video "Erlebe deinen ersten Tag als Erzieherin oder Erzieher in 360°" sowie einen Werbeteaser "Digitales Schnupperpraktikum bei AWS" - beides eigenständige Medien-/Kachel-Elemente, keine reinen Textbestandteile, beim Layout im neuen Design zu berücksichtigen.)</p>
 <p><a class="zurueck" href="../rund_ums_praktikum/index.html">← Rund ums Praktikum</a></p>
 </main>
+<section class="artikel-cta-suche">
+  <div class="cta-inner">
+    <div>
+      <h2>Bereit für die echte Suche?</h2>
+      <p>Durchsuche alle aktuellen Schülerpraktikum-Angebote in deiner Nähe - kostenlos, ohne Registrierung.</p>
+    </div>
+    <a class="cta-knopf" href="../index.html">Zur Praktikumssuche <span aria-hidden="true">→</span></a>
+  </div>
+</section>
+<section class="zehnmin" id="zehnmin">
+  <div class="wrap">
+    <div class="zm-kopf">
+      <div>
+        <h2>Digital mal reinschnuppern</h2>
+        <p>Kurze Challenges, Interviews und Spiele aus echten Unternehmen.</p>
+      </div>
+      <div class="zm-pfeile">
+        <button class="zm-pfeil" id="zm-links" type="button" aria-label="Vorherige Kacheln">←</button>
+        <button class="zm-pfeil" id="zm-rechts" type="button" aria-label="Weitere Kacheln">→</button>
+      </div>
+    </div>
+    <div class="zm-bahn" id="zm-bahn">
+      <a class="zm-kachel" href="../Zehn_Minuten_Praktikum_SIEMENS.html" target="_blank" rel="noopener">
+        <div class="zm-bild">
+          <span class="zm-dauer">10-Minuten-Praktikum</span>
+          <img src="../vorschau_bilder/kachel_siemens.jpg" alt="">
+          <span class="zm-firma">Siemens</span>
+        </div>
+        <div class="zm-text">
+          <h3>Ein Sensor ist kaputt und 20.000 Flaschen warten.</h3>
+          <div class="zm-fuss">Challenge starten <span aria-hidden="true">›</span></div>
+        </div>
+      </a>
+      <a class="zm-kachel" href="https://amazonfutureengineer.deinerstertag.de/experiences/virtuelle-tour-bei-amazon-music/" target="_blank" rel="noopener">
+        <div class="zm-bild">
+          <span class="zm-dauer">Interviews</span>
+          <img src="../vorschau_bilder/kachel_amazon.webp" alt="">
+          <span class="zm-firma">Amazon Music</span>
+        </div>
+        <div class="zm-text">
+          <h3>Wer entdeckt Stars wie Nina Chuba? Die Menschen hinter Amazon Music.</h3>
+          <div class="zm-fuss">Loslegen <span aria-hidden="true">›</span></div>
+        </div>
+      </a>
+      <a class="zm-kachel" href="../Zehn_Minuten_Praktikum_SIEYA.html" target="_blank" rel="noopener">
+        <div class="zm-bild">
+          <span class="zm-dauer">Coding-Spiel</span>
+          <img src="../vorschau_bilder/kachel_sieya_coding.png" alt="">
+          <span class="zm-firma">SIEYA</span>
+        </div>
+        <div class="zm-text">
+          <h3>2174: Rette die Menschheit – steuere den Roboter durchs Chaos.</h3>
+          <div class="zm-fuss">Starte mit coden <span aria-hidden="true">›</span></div>
+        </div>
+      </a>
+      <a class="zm-kachel" href="../Zehn_Minuten_Praktikum_SIEYA_SMARTCITY.html" target="_blank" rel="noopener">
+        <div class="zm-bild">
+          <span class="zm-dauer">Coding-Spiel</span>
+          <img src="../vorschau_bilder/kachel_sieya_smartcity.png" alt="">
+          <span class="zm-firma">SIEYA</span>
+        </div>
+        <div class="zm-text">
+          <h3>Du bist Bürgermeister*in – verwandle deine Stadt in eine Smart City.</h3>
+          <div class="zm-fuss">Stadt umbauen <span aria-hidden="true">›</span></div>
+        </div>
+      </a>
+      <a class="zm-kachel" href="https://amazonfutureengineer.deinerstertag.de/experiences/virtuelle-tour-bei-audible/" target="_blank" rel="noopener">
+        <div class="zm-bild">
+          <span class="zm-dauer">Interviews</span>
+          <img src="../vorschau_bilder/kachel_audible.jpeg" alt="">
+          <span class="zm-firma">Audible</span>
+        </div>
+        <div class="zm-text">
+          <h3>Wie entsteht ein Hit-Hörbuch? Dein Blick hinter die Kulissen von Audible.</h3>
+          <div class="zm-fuss">Loslegen <span aria-hidden="true">›</span></div>
+        </div>
+      </a>
+      <a class="zm-kachel" href="https://amazonfutureengineer.deinerstertag.de/experiences/virtuelle-tour-durch-amazon-mgm-studios/" target="_blank" rel="noopener">
+        <div class="zm-bild">
+          <span class="zm-dauer">Interviews</span>
+          <img src="../vorschau_bilder/kachel_mgm.webp" alt="">
+          <span class="zm-firma">Amazon MGM Studios</span>
+        </div>
+        <div class="zm-text">
+          <h3>Wie entsteht ein Blockbuster? Schau hinter die Kulissen von Amazon MGM Studios!</h3>
+          <div class="zm-fuss">Loslegen <span aria-hidden="true">›</span></div>
+        </div>
+      </a>
+      <a class="zm-kachel" href="https://amazonfutureengineer.deinerstertag.de/experiences/virtuelle-tour-durch-aws/" target="_blank" rel="noopener">
+        <div class="zm-bild">
+          <span class="zm-dauer">Interviews</span>
+          <img src="../vorschau_bilder/kachel_aws.webp" alt="">
+          <span class="zm-firma">AWS</span>
+        </div>
+        <div class="zm-text">
+          <h3>Wie entsteht eine KI-Lösung bei AWS – und welche Tech-Jobs stecken dahinter?</h3>
+          <div class="zm-fuss">Loslegen <span aria-hidden="true">›</span></div>
+        </div>
+      </a>
+      <a class="zm-kachel" href="https://amazonfutureengineer.deinerstertag.de/experiences/virtuelle-tour-durch-ein-rechenzentrum/" target="_blank" rel="noopener">
+        <div class="zm-bild">
+          <span class="zm-dauer">Interviews</span>
+          <img src="../vorschau_bilder/kachel_rechenzentrum.webp" alt="">
+          <span class="zm-firma">Amazon Rechenzentrum</span>
+        </div>
+        <div class="zm-text">
+          <h3>Wer bringt deine Lieblingsserie ins Wohnzimmer? Entdecke die Cloud-Profis!</h3>
+          <div class="zm-fuss">Loslegen <span aria-hidden="true">›</span></div>
+        </div>
+      </a>
+      <a class="zm-kachel" href="https://amazonfutureengineer.deinerstertag.de/experiences/virtuelle-tour-durch-ein-logistikzentrum/" target="_blank" rel="noopener">
+        <div class="zm-bild">
+          <span class="zm-dauer">Interviews</span>
+          <img src="../vorschau_bilder/kachel_logistik.webp" alt="">
+          <span class="zm-firma">Amazon Logistikzentrum</span>
+        </div>
+        <div class="zm-text">
+          <h3>Wie werden Pakete intelligent sortiert? Entdecke die Tech hinter Amazons Logistik!</h3>
+          <div class="zm-fuss">Loslegen <span aria-hidden="true">›</span></div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+<script src="../digital-karussell.js"></script>
 <footer class="footer">
   <div class="wrap">
     <a href="/ueber-uns/schuelerpraktikum.html">Über uns</a>
