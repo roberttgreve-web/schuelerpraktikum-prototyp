@@ -681,7 +681,7 @@
         <div class="erg-side-title">Oder doch erstmal digital reinschnuppern?</div>
         <div class="erg-side-sub">Challenges, Interviews, Spiele</div>
         <div class="erg-mini-tiles"></div>
-        <a href="#zehnmin" class="erg-side-btn">Alle 11 entdecken</a>
+        <a href="#zehnmin" class="erg-side-btn">Alle 9 entdecken</a>
       </aside>
 
       <!-- Ergebnisse, die über das Ende der gelben Box hinausgehen, laufen hier
@@ -715,7 +715,7 @@
         <div class="erg-side-title">Oder doch erstmal digital reinschnuppern?</div>
         <div class="erg-side-sub">Challenges, Interviews, Spiele</div>
         <div class="erg-mini-tiles"></div>
-        <a href="#zehnmin" class="erg-side-btn">Alle 11 entdecken</a>
+        <a href="#zehnmin" class="erg-side-btn">Alle 9 entdecken</a>
       </aside>
 
       <!-- Zweite Ueberlauf-Zone, analog zu cluster-oben-breit oben. -->
@@ -1319,16 +1319,13 @@
       const seiteUnten = seiteEl.getBoundingClientRect().bottom;
       const sichtbar = abschnitte.filter(el => el && !el.hidden);
       const ueberlaufIndex = sichtbar.findIndex(a => a.getBoundingClientRect().bottom > seiteUnten);
-      if (ueberlaufIndex !== -1) {
+      // Passt nicht einmal der erste Abschnitt (z.B. "Bis 5 km" in einer
+      // dichten Stadt) neben die Sidebar, bleibt sie trotzdem sichtbar - auf
+      // Wunsch nicht mehr ausblenden, auch wenn sie dadurch laenger ist als
+      // die Ergebnisspalte daneben. Nur bei echtem Ueberlauf AB dem zweiten
+      // Abschnitt wandert der Rest in die volle Breite.
+      if (ueberlaufIndex > 0) {
         for (let i = ueberlaufIndex; i < sichtbar.length; i++) breitEl.appendChild(sichtbar[i]);
-        if (ueberlaufIndex === 0) {
-          // Nicht einmal der erste Abschnitt (z.B. "Bis 5 km" in einer
-          // dichten Stadt) passt neben die Sidebar - dann lieber gar keine
-          // Box zeigen statt einer hohen gelben Flaeche neben leerem Raum.
-          seiteEl.hidden = true;
-          miniZiel.innerHTML = "";
-          return 0;
-        }
       }
     }
     return miniZiel.children.length;
