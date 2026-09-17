@@ -51,6 +51,23 @@
   .cta-knopf:hover { background: #0099bb; }
 </style>
 
+
+<style>
+  .wsv-video {
+    position: relative; max-width: 420px; border-radius: 14px; overflow: hidden;
+    cursor: pointer; margin: 0 0 28px; background: var(--tinte, #181818);
+  }
+  .wsv-video img { width: 100%; display: block; }
+  .wsv-play {
+    position: absolute; inset: 0; margin: auto; width: 62px; height: 62px; border-radius: 50%;
+    background: rgba(24,24,24,.55); border: 2px solid #fff; display: flex; align-items: center;
+    justify-content: center; pointer-events: none; transition: background .15s, transform .15s;
+  }
+  .wsv-video:hover .wsv-play { background: var(--akzent); transform: scale(1.06); }
+  .wsv-play svg { margin-left: 4px; }
+  .wsv-video iframe { width: 100%; aspect-ratio: 9 / 16; max-height: 640px; border: none; display: block; }
+</style>
+
 </head>
 <body>
 <header class="topbar">
@@ -73,7 +90,12 @@
   </div>
 </section>
 <main class="artikel">
-  <img src="vorschau_bilder/wissen_sieya_auswahltag.jpg" alt="Auswahltag: So überzeugst du" style="width:100%;max-width:420px;border-radius:14px;display:block;margin:0 0 28px;">
+  <div class="wsv-video" data-video="https://sieya.siemens.com/video/146?utm_source=d-e-t&utm_medium=schuelerpraktikum&utm_campaign=d-e-t_schuelerpraktikum">
+    <img src="vorschau_bilder/wissen_sieya_auswahltag.jpg" alt="Auswahltag: So überzeugst du">
+    <div class="wsv-play" aria-hidden="true">
+      <svg width="22" height="22" viewBox="0 0 22 22"><polygon points="4,2 20,11 4,20" fill="#fff"/></svg>
+    </div>
+  </div>
 <p>Du hast eine Einladung zum Auswahltag oder Vorstellungsgespräch bekommen - herzlichen
 Glückwunsch, das ist schon die halbe Miete! Hier ein paar Gedanken, wie du an diesem Tag
 überzeugst.</p>
@@ -91,10 +113,6 @@ Interesse.</p>
 <h2>Nervosität ist normal</h2>
 <p>Fast alle sind am Auswahltag ein bisschen aufgeregt - das ist völlig normal und wird
 selten negativ bewertet. Ein tiefes Durchatmen vorher hilft oft mehr als stundenlanges Üben.</p>
-  <p class="hinweis">In Kooperation mit SIEYA (Siemens) - im Video zeigt dir SIEYA das Thema noch einmal anschaulich.</p>
-  <p style="margin:28px 0 0;">
-    <a class="cta-knopf" href="https://sieya.siemens.com/video/146?utm_source=d-e-t&utm_medium=schuelerpraktikum&utm_campaign=d-e-t_schuelerpraktikum" target="_blank" rel="noopener">Zum Video <span aria-hidden="true">→</span></a>
-  </p>
   <p><a class="zurueck" href="/index.html">← Zurück zur Startseite</a></p>
 </main>
 <footer class="footer">
@@ -110,5 +128,6 @@ selten negativ bewertet. Ein tiefes Durchatmen vorher hilft oft mehr als stunden
 </footer>
 <script src="/cookie-consent.js"></script>
 
+<script src="/wissen-video-play.js"></script>
 </body>
 </html>
