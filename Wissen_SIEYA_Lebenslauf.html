@@ -1,39 +1,116 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Tipps zum Lebenslauf – SIEYA Video | schülerpraktikum.de</title>
-  <meta name="description" content="Tipps zum Lebenslauf - ein Video von SIEYA (Siemens), direkt bei schülerpraktikum.de eingebettet." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="site-basis.css" />
-  <style>
-    html, body { margin: 0; padding: 0; height: 100%; font-family: 'Roboto', sans-serif; background: var(--dark, #181818); }
-    .sieya-kopf {
-      display: flex; align-items: center; justify-content: space-between; gap: 16px;
-      background: var(--dark, #181818); padding: 14px 20px;
-    }
-    .sieya-zurueck {
-      color: #fff; text-decoration: none; font-size: .9rem; font-weight: 600;
-      display: inline-flex; align-items: center; gap: 6px; opacity: .92;
-    }
-    .sieya-zurueck:hover { opacity: 1; text-decoration: underline; }
-    .sieya-marke { color: #fff; font-size: .82rem; opacity: .75; }
-    .sieya-rahmen { border: none; width: 100%; display: block; height: calc(100vh - 52px); }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tipps zum Lebenslauf — Schülerpraktikum.de</title>
+<meta name="description" content="So baust du deinen Lebenslauf für ein Schülerpraktikum oder eine Ausbildung auf - was rein gehört und was nicht, plus ein Video von SIEYA.">
+<link rel="stylesheet" href="site-basis.css">
+
+<style>
+  .artikel-hero { background: var(--weiss); padding: 44px 0 8px; }
+  .artikel-hero .wrap { max-width: 760px; }
+  .brotkrume { font-size: .84rem; color: var(--tinte-weich); margin: 0 0 14px; }
+  .brotkrume a { color: var(--tinte-weich); }
+  .artikel-hero h1 { font-size: clamp(1.7rem, 4vw, 2.3rem); margin: 0 0 18px; line-height: 1.2; }
+  .artikel { max-width: 760px; margin: 0 auto; padding: 8px 24px 64px; }
+  .artikel p { line-height: 1.7; margin: 0 0 20px; color: var(--tinte); }
+  .artikel h2 { font-size: 1.4rem; margin: 40px 0 14px; }
+  .artikel h3 { font-size: 1.15rem; margin: 30px 0 10px; }
+  .artikel ul { padding-left: 22px; margin: 0 0 20px; line-height: 1.7; }
+  .artikel li { margin-bottom: 6px; }
+  .artikel blockquote {
+    margin: 24px 0; padding: 4px 0 4px 20px; border-left: 3px solid var(--akzent);
+    font-style: italic; color: var(--tinte-weich);
+  }
+  .artikel .hinweis {
+    background: var(--zm-gelb); border-radius: 12px; padding: 16px 20px; margin: 28px 0;
+    font-size: .9rem;
+  }
+  .artikel .platzhalter {
+    background: rgba(255,90,60,.12); border: 1px dashed #d9534f; border-radius: 10px;
+    padding: 14px 18px; margin: 18px 0; font-size: .88rem; color: var(--tinte);
+  }
+  .zurueck { display: inline-block; margin-top: 8px; color: var(--akzent); font-weight: 700; text-decoration: none; }
+  .zurueck:hover { text-decoration: underline; }
+  @media (max-width: 700px) { .artikel { padding: 8px 18px 48px; } }
+
+  /* ---------- Einflugschneise: CTA zur Suche + digitale Kacheln ---------- */
+  .artikel-cta-suche { background: var(--tinte); padding: 40px 0 0; }
+  .cta-inner {
+    max-width: 760px; margin: 0 auto; padding: 0 24px 32px; display: flex; align-items: center;
+    justify-content: space-between; gap: 24px; flex-wrap: wrap;
+  }
+  .cta-inner h2 { color: #fff; margin: 0 0 6px; font-size: 1.3rem; }
+  .cta-inner p { color: rgba(255,255,255,.75); margin: 0; max-width: 440px; }
+  .cta-knopf {
+    flex-shrink: 0; display: inline-flex; align-items: center; gap: 8px; background: var(--akzent);
+    color: #fff; font-weight: 700; padding: 14px 26px; border-radius: 100px; text-decoration: none;
+    white-space: nowrap;
+  }
+  .cta-knopf:hover { background: #0099bb; }
+</style>
+
 </head>
 <body>
-
-  <div class="sieya-kopf">
-    <a class="sieya-zurueck" href="https://www.schuelerpraktikum.de" target="_blank" rel="noopener">‹ Zurück zu schülerpraktikum.de</a>
-    <span class="sieya-marke">Tipps zum Lebenslauf · in Kooperation mit SIEYA (Siemens)</span>
+<header class="topbar">
+  <div class="wrap">
+    <a class="marke" href="/index.html">
+      <svg width="34" height="32" viewBox="0 0 52 49" aria-hidden="true"><defs><path id="a" d="M.003.009h39.226V47.58H.003z"/></defs><g fill="none" fill-rule="evenodd"><g transform="translate(11.312 .02)"><mask id="b" fill="#fff"><use xlink:href="#a" xmlns:xlink="http://www.w3.org/1999/xlink"/></mask><path fill="#FFF" d="M39.165 8.134L27.62.036a.15.15 0 0 0-.21.037l-7.723 11.05h2.464c2.099 0 3.706.546 4.822 1.64 1.115 1.092 1.673 2.631 1.673 4.618 0 1.986-.558 3.526-1.673 4.619-1.116 1.092-2.723 1.639-4.822 1.639h-2.875v6.208h-4.859V18.662l-2.187 3.13c.251.648.378 1.387.378 2.22 0 .96-.161 1.829-.484 2.606a5.438 5.438 0 0 1-1.412 2c-.62.554-1.38.985-2.281 1.29a8.822 8.822 0 0 1-2.172.426L.03 39.245a.151.151 0 0 0 .037.21l11.545 8.099a.15.15 0 0 0 .21-.037l27.38-39.173a.151.151 0 0 0-.037-.21" mask="url(#b)"/></g><path fill="#FFF" d="M11.819 33.478l2.355-3.37c-1.424-.325-2.778-.934-4.062-1.83l2.083-3.924c.727.646 1.445 1.126 2.156 1.44.71.315 1.413.472 2.107.472.145 0 .283-.006.415-.018l1.773-2.537c-.1-.193-.26-.372-.477-.536a3.977 3.977 0 0 0-.905-.484 30.09 30.09 0 0 0-1.351-.497 26.925 26.925 0 0 1-1.847-.658 5.8 5.8 0 0 1-1.611-.956 4.436 4.436 0 0 1-1.14-1.502c-.29-.605-.434-1.37-.434-2.297s.152-1.767.458-2.52a5.599 5.599 0 0 1 1.29-1.938c.553-.538 1.23-.956 2.032-1.254.801-.298 1.698-.447 2.69-.447.925 0 1.892.129 2.9.385a12.8 12.8 0 0 1 2.9 1.13l-1.933 3.8c-.53-.431-1.058-.75-1.587-.957a4.21 4.21 0 0 0-1.537-.31c-.628 0-1.14.149-1.537.447-.396.298-.595.687-.595 1.167 0 .331.1.604.298.82.198.215.458.401.78.558.323.158.686.294 1.091.41.405.116.806.24 1.203.372.885.296 1.637.647 2.257 1.053l5.534-7.916a.151.151 0 0 0-.038-.21L15.543 3.273a.15.15 0 0 0-.21.037L.027 25.207a.151.151 0 0 0 .037.21l11.545 8.098a.15.15 0 0 0 .21-.037M34.876 17.401c0-1.556-.893-2.334-2.677-2.334h-1.612v4.669H32.2c1.784 0 2.677-.778 2.677-2.335"/></g></svg>
+      <span>schülerpraktikum.de</span>
+    </a>
+    <nav class="topnav">
+      <a href="/alle-staedte.html">Alle Städte</a>
+      <a href="/alle-bundeslaender.html">Alle Bundesländer</a>
+    </nav>
   </div>
+</header>
 
-  <iframe class="sieya-rahmen"
-    src="https://sieya.siemens.com/video/145?utm_source=d-e-t&utm_medium=schuelerpraktikum&utm_campaign=d-e-t_schuelerpraktikum"
-    title="SIEYA Video: Tipps zum Lebenslauf" loading="lazy" allow="fullscreen" allowfullscreen></iframe>
+<section class="artikel-hero">
+  <div class="wrap">
+    <p class="brotkrume"><a href="/index.html">Startseite</a></p>
+    <h1>Tipps zum Lebenslauf</h1>
+  </div>
+</section>
+<main class="artikel">
+  <img src="vorschau_bilder/wissen_sieya_lebenslauf.jpg" alt="Tipps zum Lebenslauf" style="width:100%;max-width:420px;border-radius:14px;display:block;margin:0 0 28px;">
+<p>Der Lebenslauf ist meist das Herzstück jeder Bewerbung - er gibt auf einen Blick Auskunft
+darüber, wer du bist und was du bisher gemacht hast. Hier die wichtigsten Punkte für deinen
+ersten Lebenslauf.</p>
+
+<h2>Der klassische Aufbau</h2>
+<p>Ein Lebenslauf beginnt meist mit deinen persönlichen Daten (Name, Adresse, Kontakt, optional
+ein Foto), gefolgt von deinem schulischen Werdegang - welche Schule besuchst du, in welcher
+Klassenstufe bist du. Danach folgen, falls vorhanden, bisherige Praktika, Nebenjobs oder
+Ehrenämter, sowie besondere Kenntnisse (Sprachen, Computerprogramme) und Hobbys.</p>
+
+<h2>Häufige Fragen</h2>
+<p>Hast du noch keine Praktika oder Nebenjobs? Kein Problem - schreib stattdessen, was dich an
+der Stelle interessiert, oder nenne Schulprojekte, die zum Thema passen. Wichtig ist vor allem,
+dass die Angaben stimmen und übersichtlich aufbereitet sind - lieber kurz und klar als
+vollgestopft.</p>
+
+<h2>Der letzte Check</h2>
+<p>Bevor du deinen Lebenslauf abschickst: nochmal auf Rechtschreibfehler prüfen, am besten von
+jemand anderem gegenlesen lassen, und darauf achten, dass die Kontaktdaten aktuell sind.</p>
+  <p class="hinweis">In Kooperation mit SIEYA (Siemens) - im Video zeigt dir SIEYA das Thema noch einmal anschaulich.</p>
+  <p style="margin:28px 0 0;">
+    <a class="cta-knopf" href="https://sieya.siemens.com/video/145?utm_source=d-e-t&utm_medium=schuelerpraktikum&utm_campaign=d-e-t_schuelerpraktikum" target="_blank" rel="noopener">Zum Video <span aria-hidden="true">→</span></a>
+  </p>
+  <p><a class="zurueck" href="/index.html">← Zurück zur Startseite</a></p>
+</main>
+<footer class="footer">
+  <div class="wrap">
+    <a href="/ueber-uns/schuelerpraktikum.html">Über uns</a>
+    <a href="/rechtliches/agb.html">AGB</a>
+    <a href="/rechtliches/impressum.html">Impressum</a>
+    <a href="/rechtliches/datenschutz.html">Datenschutzerklärung</a>
+    <a href="/ueber-uns/kontakt.html">Kontakt</a>
+    <a href="https://www.deinerstertag.de/vorfall-melden/" target="_blank" rel="noopener">Vorfall melden</a>
+    <a href="#" onclick="window.spOpenCookieSettings && window.spOpenCookieSettings(); return false;">Cookie-Einstellungen</a>
+  </div>
+</footer>
+<script src="/cookie-consent.js"></script>
 
 </body>
 </html>
