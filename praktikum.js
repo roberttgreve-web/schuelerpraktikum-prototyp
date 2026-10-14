@@ -1,4 +1,4 @@
-// Wird von jeder generierten Praktikumsseite geladen (praktikum/{land}/{slug}.html),
+// Wird von jeder generierten Praktikumsseite geladen (praktikumsplatz/{slug}.html),
 // deshalb ausschliesslich mit dem Pfad-Praefix "../../" gearbeitet.
 
 // Pool der "Digital mal reinschnuppern"-Kacheln, identisch zur Startseite.
