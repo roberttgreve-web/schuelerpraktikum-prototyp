@@ -1,0 +1,3 @@
+# Prototyp - nicht fuer Suchmaschinen gedacht. Live gilt _uebergabe/robots.live.txt
+User-agent: *
+Disallow: /
